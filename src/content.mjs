@@ -40,9 +40,9 @@ export const site = {
   instagram: '@maternidadconadri',
   instagramUrl: 'https://instagram.com/maternidadconadri',
   driveUrl: 'https://drive.google.com',
-  url: '',
-  title: 'Adriana Seijas | Creadora UGC & Comunicadora — Ciudad de México',
-  description: 'Creadora de contenido UGC y comunicadora en Ciudad de México. Especializada en maternidad, bienestar y vida familiar. Videos auténticos que conectan con familias y generan confianza.',
+  url: 'https://maternidadconadri.com',
+  title: 'Adriana Seijas | Maternidad con Adri — Creadora UGC & Comunicación en México',
+  description: 'Creadora de contenido UGC y comunicadora en Ciudad de México. Especializada en marcas de maternidad, bienestar y vida familiar. Videos auténticos en 4K que conectan y generan confianza.',
   portrait: {
     src: '/images/adri.webp',
     alt: 'Adriana Seijas, creadora UGC y comunicadora especializada en maternidad, bienestar y vida familiar',
@@ -260,6 +260,32 @@ export const site = {
           'Tarifa preferencial por volumen'
         ],
         ctaText: 'Cotizar Plan a Medida'
+      }
+    ]
+  },
+  faq: {
+    title: 'Preguntas Frecuentes',
+    intro: 'Respuestas directas para agencias y marcas sobre envíos, plazos, derechos comerciales y facturación.',
+    items: [
+      {
+        question: '¿Cómo funciona el envío de productos en México e internacional?',
+        answer: 'Una vez definido el enfoque y guion creativo, la marca envía el producto a Ciudad de México. Desde el momento en que se recibe físicamente el paquete, el plazo de producción y entrega del material terminado es de 3 a 5 días hábiles.'
+      },
+      {
+        question: '¿Qué derechos de uso y pauta publicitaria (Paid Media) se incluyen?',
+        answer: 'Todos los paquetes contemplan derechos de uso comercial completos para publicación orgánica en tus canales y para pauta publicitaria pagada (Instagram Ads, TikTok Ads y Meta Ads) sin costos ocultos.'
+      },
+      {
+        question: '¿Trabajas con marcas fuera de México?',
+        answer: 'Sí, habitualmente colaboro con marcas de Estados Unidos (mercado hispano), España, Latinoamérica y México. La comunicación, revisión de propuestas y entrega de archivos en alta resolución se gestiona de forma 100% remota y ágil vía Google Drive.'
+      },
+      {
+        question: '¿Emites facturación electrónica fiscal en México?',
+        answer: 'Sí, emito factura electrónica oficial (CFDI) conforme a las disposiciones fiscales del SAT en México para empresas y marcas registradas.'
+      },
+      {
+        question: '¿Por qué elegir un perfil con formación en periodismo y comunicación?',
+        answer: 'A diferencia de contenidos improvisados, la formación periodística aporta dicción profesional, estructura narrativa persuasiva y capacidad para transmitir los beneficios del producto de forma cercana, creíble y honesta.'
       }
     ]
   },

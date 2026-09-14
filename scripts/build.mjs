@@ -34,8 +34,36 @@ export async function build() {
   await writeFile(path.join(dist, 'styles.css'), `${await readFile(path.join(root,'src/styles.css'),'utf8')}\n${await readFile(path.join(root,'src/refinements.css'),'utf8')}\n.portrait-image{object-position:${site.portrait.position.replace(/[^0-9.% a-z-]/g,'')}}`);
   await writeFile(path.join(dist, 'index.html'), render(site, assets), 'utf8');
   const url = site.url.replace(/\/$/, '');
-  await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n${url ? `Sitemap: ${url}/sitemap.xml\n` : ''}`);
-  if (url) await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${url}/</loc></url></urlset>`);
+  const robotsContent = `User-agent: *
+Allow: /
+
+# Motores de Búsqueda de Inteligencia Artificial (GEO)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+${url ? `Sitemap: ${url}/sitemap.xml\n` : ''}`;
+  await writeFile(path.join(dist, 'robots.txt'), robotsContent, 'utf8');
+
+  if (url) {
+    const today = new Date().toISOString().split('T')[0];
+    const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${url}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+`;
+    await writeFile(path.join(dist, 'sitemap.xml'), sitemapContent, 'utf8');
+  }
   await writeFile(path.join(dist, '404.html'), '<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Página no encontrada | Adri</title><link rel="stylesheet" href="/styles.css"><main class="wrap about"><h1>Esta historia no está aquí.</h1><a class="text-link" href="/">Volver al portfolio de Adri</a></main></html>');
   console.log(`Portfolio generado en dist. Foto: ${assets[site.portrait.src] ? 'lista' : 'pendiente'}. Videos: ${site.work.pieces.filter(p => assets[p.video]).length}/3.`);
 }

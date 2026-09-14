@@ -94,6 +94,89 @@ export function render(site, assets) {
     `;
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${base}/#website`,
+        url: `${base}/`,
+        name: 'Maternidad con Adri',
+        alternateName: ['Adriana Seijas UGC', 'Maternidad con Adri — Portfolio'],
+        description: site.description,
+        inLanguage: 'es-MX',
+        publisher: { '@id': `${base}/#person` }
+      },
+      {
+        '@type': 'Person',
+        '@id': `${base}/#person`,
+        name: site.name,
+        alternateName: ['Adri', 'Maternidad con Adri', 'Adriana Seijas UGC'],
+        jobTitle: site.role,
+        description: site.description,
+        url: `${base}/`,
+        image: `${base}${site.portrait.src}`,
+        email: `mailto:${site.email}`,
+        sameAs: [
+          site.instagramUrl
+        ],
+        knowsAbout: [
+          'User Generated Content (UGC)',
+          'Maternidad y Crianza',
+          'Bienestar Familiar',
+          'Video Vertical 9:16',
+          'TikTok Ads',
+          'Instagram Reels',
+          'Periodismo y Comunicación'
+        ],
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: site.city,
+          addressRegion: site.region,
+          addressCountry: 'MX'
+        }
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${base}/#service`,
+        name: 'Maternidad con Adri — Servicios UGC & Estrategia Creativa',
+        url: `${base}/`,
+        provider: { '@id': `${base}/#person` },
+        image: `${base}/images/og-adri.jpg`,
+        description: site.description,
+        areaServed: [
+          { '@type': 'Country', name: 'Mexico' },
+          { '@type': 'Country', name: 'United States' },
+          { '@type': 'Country', name: 'Spain' }
+        ],
+        priceRange: '$$ (MXN)',
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Paquetes de Creación UGC',
+          itemListElement: site.pricing.packages.map(pkg => ({
+            '@type': 'Offer',
+            name: pkg.name,
+            description: pkg.summary,
+            price: pkg.price.replace(/[^0-9]/g, '') || undefined,
+            priceCurrency: pkg.currency
+          }))
+        }
+      },
+      ...(site.faq ? [{
+        '@type': 'FAQPage',
+        '@id': `${base}/#faq`,
+        mainEntity: site.faq.items.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer
+          }
+        }))
+      }] : [])
+    ]
+  };
+
   return `<!doctype html>
 <html lang="es-MX">
 <head>
@@ -101,20 +184,29 @@ export function render(site, assets) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${e(site.title)}</title>
   <meta name="description" content="${e(site.description)}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#f7f4ec">
   <meta name="color-scheme" content="light">
 
+  <!-- Geotargeting & Local Signals (GEO) -->
+  <meta name="geo.region" content="MX-CMX">
+  <meta name="geo.placename" content="Ciudad de México">
+  <meta name="geo.position" content="19.4326;-99.1332">
+  <meta name="ICBM" content="19.4326, -99.1332">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_MX">
-  <meta property="og:site_name" content="Adriana Seijas — UGC & Creative Strategy">
+  <meta property="og:site_name" content="Maternidad con Adri — Adriana Seijas">
   <meta property="og:title" content="${e(site.title)}">
   <meta property="og:description" content="${e(site.description)}">
   <meta property="og:image" content="${e(base)}/images/og-adri.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Adriana Seijas — UGC Creator & Creative Strategist">
+  <meta property="og:image:alt" content="Adriana Seijas | Maternidad con Adri — Creadora UGC y Comunicación">
 
+  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${e(site.title)}">
   <meta name="twitter:description" content="${e(site.description)}">
@@ -122,6 +214,8 @@ export function render(site, assets) {
 
   ${base ? `<link rel="canonical" href="${e(base)}/"><meta property="og:url" content="${e(base)}/">` : ''}
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+
+  <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
 
   <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -142,6 +236,7 @@ export function render(site, assets) {
       <a href="#trabajo">Showcase</a>
       <a href="#entregables">Entregables</a>
       <a href="#tarifas">Tarifas</a>
+      <a href="#preguntas">Preguntas</a>
       <a class="nav-contact" href="#contacto">Contacto ${icons.diagonal}</a>
     </nav>
   </header>
@@ -354,6 +449,31 @@ export function render(site, assets) {
         </div>
       </div>
     </section>
+
+    <!-- PREGUNTAS FRECUENTES (FAQ & GEO OPTIMIZATION) -->
+    ${site.faq ? `
+    <section class="faq wrap" id="preguntas" aria-labelledby="faq-title">
+      <div class="section-badge">Preguntas Frecuentes</div>
+      <div class="section-intro">
+        <h2 id="faq-title">${e(site.faq.title)}</h2>
+        <p>${e(site.faq.intro)}</p>
+      </div>
+
+      <div class="faq-accordion">
+        ${site.faq.items.map((item, idx) => `
+          <details class="faq-item"${idx === 0 ? ' open' : ''}>
+            <summary class="faq-summary">
+              <span class="faq-question">${e(item.question)}</span>
+              <span class="faq-icon" aria-hidden="true">${icons.down}</span>
+            </summary>
+            <div class="faq-content">
+              <p>${e(item.answer)}</p>
+            </div>
+          </details>
+        `).join('')}
+      </div>
+    </section>
+    ` : ''}
 
     <!-- FOOTER / CONTACTO RÁPIDO (Cero Fricción) -->
     <section class="contact-section wrap" id="contacto" aria-labelledby="contact-title">
