@@ -115,6 +115,35 @@
   margin-top: 8px;
 }
 
+/* Calibración armónica del marco de retrato (Hero) para evitar desalineación */
+.hero-portrait {
+  width: 100%;
+  max-width: 350px;
+  margin-inline: auto;
+}
+
+.portrait-frame {
+  max-width: 350px;
+  margin-inline: auto;
+}
+
+.portrait-image, .portrait-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  border-radius: 192px 192px 18px 18px;
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 56px;
+    align-items: center;
+  }
+}
+
+
 /* Cabeceras de sección con layout editorial split en pantallas medianas y grandes */
 @media (min-width: 860px) {
   .section-intro {

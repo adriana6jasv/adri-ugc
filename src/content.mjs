@@ -46,7 +46,7 @@ export const site = {
   portrait: {
     src: '/images/adri.webp',
     alt: 'Adriana Seijas, creadora UGC y comunicadora especializada en maternidad, bienestar y vida familiar',
-    position: '50% 25%'
+    position: '50% 18%'
   },
   hero: {
     identity: 'Adriana Seijas',
