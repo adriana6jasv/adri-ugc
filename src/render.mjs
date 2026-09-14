@@ -212,7 +212,7 @@ export function render(site, assets) {
   <meta name="twitter:description" content="${e(site.description)}">
   <meta name="twitter:image" content="${e(base)}/images/og-adri.jpg">
 
-  ${base ? `<link rel="canonical" href="${e(base)}/"><meta property="og:url" content="${e(base)}/">` : ''}
+  ${base ? `<link rel="canonical" href="${e(base)}/"><meta property="og:url" content="${e(base)}/">\n  <link rel="alternate" type="text/plain" href="${e(base)}/llms.txt" title="LLMs.txt">` : ''}
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 
   <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
