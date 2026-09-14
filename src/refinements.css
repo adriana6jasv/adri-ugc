@@ -1,0 +1,200 @@
+/* Refinamientos específicos para CRO, accesibilidad y visualización mobile-first */
+
+/* Control de visibilidad nativo */
+[hidden] { display: none !important; }
+
+/* Micro-ajustes del Hero para mobile (< 600px) */
+@media (max-width: 599px) {
+  .site-header {
+    min-height: 64px;
+    padding-block: 10px;
+  }
+  .wordmark {
+    font-size: 36px;
+  }
+  .nav-contact {
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+  .hero {
+    padding-top: 24px;
+    gap: 32px;
+  }
+  .hero-name {
+    font-size: clamp(44px, 12vw, 64px);
+  }
+  .hero-tagline {
+    font-size: clamp(19px, 5vw, 26px);
+  }
+  .hero-matrix {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+  .matrix-item {
+    padding: 10px 12px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .hero-actions .button,
+  .hero-actions .btn-copy-fast {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-portrait {
+    max-width: 310px;
+  }
+  .portrait-frame {
+    border-radius: 160px 160px 20px 20px;
+    padding: 6px;
+  }
+  .portrait-placeholder, .portrait-image {
+    border-radius: 154px 154px 16px 16px;
+  }
+  .portrait-note {
+    left: -6px;
+    bottom: 16px;
+    padding: 12px 14px;
+    max-width: 150px;
+  }
+  .portrait-note p {
+    font-size: 17px;
+  }
+  .hero-portrait figcaption {
+    margin-top: 14px;
+  }
+  .hook-tabs {
+    flex-direction: column;
+  }
+  .hook-tab-btn {
+    text-align: left;
+    width: 100%;
+  }
+  .pricing-card {
+    padding: 28px 20px;
+  }
+  .contact-card {
+    padding: 28px 20px;
+    border-radius: var(--radius-lg);
+  }
+  .email-copy-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Feedback táctil de botones */
+.button, .filter-btn, .hook-tab-btn, .btn-copy-chip, .btn-copy-fast {
+  touch-action: manipulation;
+}
+
+/* Indicador de relación 9:16 nativa */
+.film {
+  background: #141210;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.cover-title span.italic {
+  color: #ffd8cc;
+}
+
+/* ==========================================================================
+   BALANCE DE ESPACIOS Y LAYOUT EDITORIAL (SOLUCIÓN A ESPACIOS VACÍOS)
+   ========================================================================== */
+
+/* Hero intro: alinear con el ancho total de la matriz operativa */
+.hero-intro {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink);
+  opacity: 0.88;
+  max-width: 100%;
+  margin-top: 8px;
+}
+
+/* Cabeceras de sección con layout editorial split en pantallas medianas y grandes */
+@media (min-width: 860px) {
+  .section-intro {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+  .section-intro h2 {
+    margin-bottom: 0;
+  }
+  .section-intro p {
+    max-width: 100%;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* ==========================================================================
+   BLOQUE DESTACADO DE FACTURACIÓN Y FLEXIBILIDAD (TRUST BADGES)
+   ========================================================================== */
+.pricing-footnotes {
+  margin-top: 48px;
+  background: var(--surface);
+  border: 1px solid rgba(142, 71, 54, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 24px 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(45, 33, 24, 0.04);
+}
+
+@media (min-width: 768px) {
+  .pricing-footnotes {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+.footnote-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.footnote-item .fn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(142, 71, 54, 0.1);
+  color: var(--clay);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.footnote-item .fn-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footnote-item p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footnote-item strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
