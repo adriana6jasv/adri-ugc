@@ -17,8 +17,8 @@ export const site = {
 
   portrait: {
     src: '/images/v2-hero-portrait.jpg',
-    alt: 'Adriana Seijas con su hija, creadora UGC y comunicadora en México',
-    position: '50% 20%'
+    alt: 'Adriana Seijas con sus dos hijos, creadora UGC y comunicadora en México',
+    position: '50% 50%'
   },
 
   hero: {
@@ -37,7 +37,7 @@ export const site = {
     },
     portrait: {
       src: '/images/v2-hero-portrait.jpg',
-      alt: 'Adriana Seijas, creadora UGC y comunicadora'
+      alt: 'Adriana Seijas con sus dos hijos, creadora UGC y comunicadora'
     }
   },
 
