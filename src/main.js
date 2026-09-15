@@ -1,16 +1,16 @@
 import { icons } from './icons.mjs';
 
-// Video players controller
+// Spotlight video players controller
 const players = [...document.querySelectorAll('[data-player]')];
 const clock = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '0:00';
 
 for (const player of players) {
   const video = player.querySelector('video');
-  const controls = player.querySelector('.v2-player-controls');
+  const controls = player.querySelector('.spotlight-player-controls, .v2-player-controls');
   const toggles = [...player.querySelectorAll('[data-toggle]')];
   const mute = player.querySelector('[data-mute]');
-  const seek = player.querySelector('.control-seek');
-  const time = player.querySelector('.control-time');
+  const seek = player.querySelector('.ctrl-seek, .control-seek');
+  const time = player.querySelector('.ctrl-time, .control-time');
   const fullscreen = player.querySelector('[data-fullscreen]');
   let seeking = false;
 
@@ -18,11 +18,13 @@ for (const player of players) {
     const update = () => {
       player.classList.toggle('is-playing', !video.paused);
       toggles.forEach(button => {
-        button.innerHTML = video.paused ? icons.play : icons.pause;
+        button.innerHTML = video.paused 
+          ? `<span class="play-icon-inner" aria-hidden="true">${icons.play}</span>` 
+          : `<span class="play-icon-inner" aria-hidden="true">${icons.pause}</span>`;
         button.setAttribute('aria-label', `${video.paused ? 'Reproducir' : 'Pausar'} video`);
       });
       if (time) time.textContent = `${clock(video.currentTime)} / ${clock(video.duration)}`;
-      if (seek && !seeking) seek.value = Number.isFinite(video.duration) && video.duration > 0 ? video.currentTime / video.duration * 100 : 0;
+      if (seek && !seeking) seek.value = Number.isFinite(video.duration) && video.duration > 0 ? (video.currentTime / video.duration * 100) : 0;
       if (mute) {
         mute.innerHTML = video.muted ? icons.muted : icons.sound;
         mute.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar');
@@ -73,10 +75,10 @@ for (const player of players) {
     if (controls) controls.hidden = false;
     update();
   } else {
-    // Cuando el video es una muestra con poster
+    // When video is poster-only, clicking the toggle scrolls down to contact
     toggles.forEach(button => {
-      button.addEventListener('click', () => {
-        const title = player.querySelector('.video-card-title')?.textContent || 'este formato';
+      button.addEventListener('click', (ev) => {
+        ev.preventDefault();
         const contactSection = document.getElementById('contacto');
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth' });
