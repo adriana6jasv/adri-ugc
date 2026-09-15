@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ADRIANA SEIJAS — PORTFOLIO EDITORIAL UGC (v2 Pass 2: Refined & De-noised)
+   ADRIANA SEIJAS — PORTFOLIO EDITORIAL UGC (v2 Final Polish)
    Design System: Editorial Lifestyle, Warm Ivory, Asymmetric High-Whitespace
    ========================================================================== */
 
@@ -187,6 +187,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .header-brand {
@@ -201,6 +202,7 @@ a {
   align-items: center;
   justify-content: center;
   color: var(--terracotta);
+  flex-shrink: 0;
 }
 
 .brand-monogram svg {
@@ -264,6 +266,10 @@ a {
 
 .header-nav a:hover::after {
   width: 100%;
+}
+
+.header-cta-wrap {
+  flex-shrink: 0;
 }
 
 .editorial-link-btn {
@@ -1230,12 +1236,21 @@ a {
 
 @media (max-width: 680px) {
   :root {
-    --header-height: 72px;
+    --header-height: 68px;
   }
 
   .container {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .editorial-header {
+    height: var(--header-height);
+  }
+
+  .editorial-header .container {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .editorial-header .header-nav {
@@ -1243,7 +1258,8 @@ a {
   }
 
   .header-brand {
-    gap: 10px;
+    gap: 8px;
+    min-width: 0;
   }
 
   .brand-monogram svg {
@@ -1252,16 +1268,27 @@ a {
   }
 
   .brand-name {
-    font-size: 17px;
+    font-size: 16px;
+    white-space: nowrap;
   }
 
   .brand-role {
     display: none;
   }
 
+  .header-cta-wrap {
+    flex-shrink: 0;
+  }
+
   .editorial-link-btn {
-    padding: 7px 16px;
-    font-size: 12.5px;
+    padding: 6px 14px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .editorial-link-btn .arrow-svg svg {
+    width: 11px;
+    height: 11px;
   }
 
   .editorial-hero {
