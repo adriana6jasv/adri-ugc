@@ -30,12 +30,31 @@ for (const player of players) {
   };
 
   const play = async () => {
-    players.forEach(other => { if (other !== player) other.querySelector('video')?.pause(); });
+    players.forEach(other => {
+      if (other !== player) {
+        const otherVid = other.querySelector('video');
+        if (otherVid && !otherVid.paused) otherVid.pause();
+      }
+    });
     if (error) error.hidden = true;
-    try {
-      await video.play();
-    } catch (err) {
-      if (err.name !== 'AbortError' && error) error.hidden = false;
+    if (video.currentTime === 0 && video.muted) {
+      video.muted = false;
+      try {
+        await video.play();
+      } catch {
+        video.muted = true;
+        try {
+          await video.play();
+        } catch (innerErr) {
+          if (innerErr.name !== 'AbortError' && error) error.hidden = false;
+        }
+      }
+    } else {
+      try {
+        await video.play();
+      } catch (err) {
+        if (err.name !== 'AbortError' && error) error.hidden = false;
+      }
     }
     update();
   };
@@ -45,13 +64,37 @@ for (const player of players) {
   toggles.forEach(button => button.addEventListener('click', toggle));
   video.addEventListener('click', toggle);
   video.addEventListener('play', () => {
-    players.forEach(other => { if (other !== player) other.querySelector('video')?.pause(); });
+    players.forEach(other => {
+      if (other !== player) other.querySelector('video')?.pause();
+    });
     update();
   });
-  ['pause', 'ended', 'timeupdate', 'loadedmetadata', 'volumechange'].forEach(event => video.addEventListener(event, update));
+  video.addEventListener('ended', () => {
+    video.currentTime = 0;
+    update();
+  });
+  video.addEventListener('volumechange', () => {
+    if (!video.muted && !video.paused) {
+      players.forEach(other => {
+        if (other !== player) other.querySelector('video')?.pause();
+      });
+    }
+    update();
+  });
+  ['pause', 'timeupdate', 'loadedmetadata'].forEach(event => video.addEventListener(event, update));
   video.addEventListener('error', () => { if (error) error.hidden = false; });
   video.querySelector('source')?.addEventListener('error', () => { if (error) error.hidden = false; });
-  if (mute) mute.addEventListener('click', () => { video.muted = !video.muted; });
+  if (mute) {
+    mute.addEventListener('click', () => {
+      video.muted = !video.muted;
+      if (!video.muted && !video.paused) {
+        players.forEach(other => {
+          if (other !== player) other.querySelector('video')?.pause();
+        });
+      }
+      update();
+    });
+  }
   if (seek) {
     seek.addEventListener('input', () => {
       if (Number.isFinite(video.duration)) {
@@ -80,7 +123,16 @@ for (const player of players) {
 
   player.addEventListener('keydown', event => {
     if (event.target.tagName === 'INPUT' || event.target.tagName === 'BUTTON') return;
-    if (event.code === 'Space') { event.preventDefault(); toggle(); }
+    if (event.code === 'Space' || event.key === 'k' || event.key === 'K') {
+      event.preventDefault();
+      toggle();
+    } else if (event.key === 'm' || event.key === 'M') {
+      event.preventDefault();
+      if (mute) {
+        video.muted = !video.muted;
+        update();
+      }
+    }
   });
 
   video.controls = false;
