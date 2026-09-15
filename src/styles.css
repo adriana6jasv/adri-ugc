@@ -629,9 +629,25 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   padding: 0;
+  border-radius: 4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.spotlight-player-controls .ctrl-btn:hover {
+  transform: scale(1.1);
+}
+
+.spotlight-player-controls .ctrl-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.spotlight-play-btn:focus-visible {
+  outline: 3px solid var(--terracotta);
+  outline-offset: 4px;
 }
 
 .spotlight-player-controls .ctrl-btn svg {
@@ -649,9 +665,15 @@ a {
 
 .ctrl-seek {
   flex-grow: 1;
-  height: 4px;
+  height: 6px;
   accent-color: var(--terracotta);
   cursor: pointer;
+  padding: 4px 0;
+}
+
+.ctrl-seek:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 /* Spotlight Story Column */

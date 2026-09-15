@@ -32,26 +32,61 @@ for (const player of players) {
     };
 
     const play = async () => {
-      players.forEach(other => { if (other !== player) other.querySelector('video')?.pause(); });
+      players.forEach(other => {
+        if (other !== player) {
+          const otherVid = other.querySelector('video');
+          if (otherVid && !otherVid.paused) otherVid.pause();
+        }
+      });
+      // User explicitly initiated playback: attempt unmuted playback
+      video.muted = false;
       try {
         await video.play();
       } catch (err) {
-        if (err.name !== 'AbortError') console.warn(err);
+        // Fallback to muted playback if browser autoplay/sound policy restricts
+        video.muted = true;
+        try {
+          await video.play();
+        } catch (e2) {
+          if (e2.name !== 'AbortError') console.warn(e2);
+        }
       }
       update();
     };
 
     const toggle = () => video.paused ? play() : video.pause();
 
-    toggles.forEach(button => button.addEventListener('click', toggle));
-    video.addEventListener('click', toggle);
+    toggles.forEach(button => button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    }));
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
     video.addEventListener('play', () => {
-      players.forEach(other => { if (other !== player) other.querySelector('video')?.pause(); });
+      players.forEach(other => {
+        if (other !== player) {
+          const otherVid = other.querySelector('video');
+          if (otherVid && !otherVid.paused) otherVid.pause();
+        }
+      });
       update();
     });
-    ['pause', 'ended', 'timeupdate', 'loadedmetadata', 'volumechange'].forEach(event => video.addEventListener(event, update));
-    if (mute) mute.addEventListener('click', () => { video.muted = !video.muted; });
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      update();
+    });
+    ['pause', 'timeupdate', 'loadedmetadata', 'volumechange'].forEach(event => video.addEventListener(event, update));
+    if (mute) {
+      mute.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        update();
+      });
+    }
     if (seek) {
+      seek.addEventListener('click', (e) => e.stopPropagation());
       seek.addEventListener('input', () => {
         if (Number.isFinite(video.duration)) {
           seeking = true;
@@ -63,7 +98,8 @@ for (const player of players) {
     }
 
     if (fullscreen) {
-      fullscreen.addEventListener('click', async () => {
+      fullscreen.addEventListener('click', async (e) => {
+        e.stopPropagation();
         try {
           if (document.fullscreenElement) await document.exitFullscreen();
           else if (player.requestFullscreen) await player.requestFullscreen();

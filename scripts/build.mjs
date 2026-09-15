@@ -18,8 +18,12 @@ async function copyDir(from, to) {
 
 export async function build() {
   const assets = {};
-  const paths = [site.portrait.src, ...site.work.pieces.flatMap(p => [p.video, p.poster, p.captions])];
+  const paths = [site.portrait.src, ...site.work.pieces.flatMap(p => [p.video, p.poster, p.captions])].filter(Boolean);
   for (const src of paths) {
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      assets[src] = true;
+      continue;
+    }
     try {
       const buffer = await readFile(path.join(root, 'public', src));
       assets[src] = src.endsWith('.mp4') ? buffer.length > 24 && buffer.subarray(4,8).toString() === 'ftyp' : buffer.length > 0;

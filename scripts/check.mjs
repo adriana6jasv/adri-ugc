@@ -47,13 +47,15 @@ for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
   }
 }
 
-// 8. Estados de video listos
-const ready = Object.fromEntries(site.work.pieces.map(p => [p.video, true]));
-const active = render(site, ready);
-assert.equal((active.match(/<video\b/g) || []).length, 3, 'Tres tags de video cuando están listos');
-assert.equal((active.match(/preload="none"/g) || []).length, 3, 'Preload none en todos');
-assert.equal((active.match(/playsinline/g) || []).length, 3, 'Playsinline en todos');
-assert((active.match(/muted/g) || []).length >= 3, 'Inicio silenciado');
+// 8. Estados de video listos con Vercel Blob
+assert.equal((html.match(/<video\b/g) || []).length, 3, 'Tres tags de video en dist/index.html');
+assert.equal((html.match(/preload="none"/g) || []).length, 3, 'Preload none en todos');
+assert.equal((html.match(/playsinline/g) || []).length, 3, 'Playsinline en todos');
+assert((html.match(/muted/g) || []).length >= 3, 'Inicio silenciado');
+for (const piece of site.work.pieces) {
+  assert(html.includes(piece.video), `URL de video presente: ${piece.video}`);
+  assert(html.includes(piece.poster), `URL de poster presente: ${piece.poster}`);
+}
 
 // 9. Código JS y CSS
 const source = await readFile(path.join(root, 'src/main.js'), 'utf8');

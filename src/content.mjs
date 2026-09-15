@@ -52,9 +52,8 @@ export const site = {
         title: 'Problem → Solution',
         copy: 'Un problema real. Una solución integrada naturalmente en la historia.',
         tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
-        poster: '/images/v2-video-family.jpg',
-        video: '/videos/video-problem-solution.mp4',
-        captions: '/videos/problem-solution.es.vtt',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v1.mp4',
         aspect: '9:16'
       },
       {
@@ -63,9 +62,8 @@ export const site = {
         title: 'Voice-over Storytelling',
         copy: 'Narrativa visual, producto y voz construyendo una misma historia.',
         tags: ['Voice-over', 'B-roll', 'Product Detail', 'Editing'],
-        poster: '/images/v2-video-care.jpg',
-        video: '/videos/video-voiceover.mp4',
-        captions: '/videos/voiceover.es.vtt',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/voiceover-storytelling-v1.mp4',
         aspect: '9:16'
       },
       {
@@ -74,9 +72,8 @@ export const site = {
         title: 'Real Mom Storytelling',
         copy: 'Una historia primero. Una integración comercial después.',
         tags: ['Storytelling', 'Motherhood', 'Lifestyle', 'Authenticity'],
-        poster: '/images/v2-video-product.jpg',
-        video: '/videos/video-real-mom-storytelling.mp4',
-        captions: '/videos/real-mom.es.vtt',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/real-mom-storytelling.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/real-mom-storytelling-v1.mp4',
         aspect: '9:16'
       }
     ]
