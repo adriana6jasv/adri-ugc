@@ -30,7 +30,7 @@ export async function build() {
   await rm(dist, { recursive: true, force: true });
   await mkdir(dist, { recursive: true });
   await copyDir(path.join(root, 'public'), dist);
-  await Promise.all(['styles.css', 'main.js', 'icons.mjs'].map(name => copyFile(path.join(root, 'src', name), path.join(dist, name))));
+  await Promise.all(['styles.css', 'refinements.css', 'main.js', 'icons.mjs'].map(name => copyFile(path.join(root, 'src', name), path.join(dist, name))));
   await writeFile(path.join(dist, 'styles.css'), `${await readFile(path.join(root,'src/styles.css'),'utf8')}\n${await readFile(path.join(root,'src/refinements.css'),'utf8')}\n.portrait-image{object-position:${site.portrait.position.replace(/[^0-9.% a-z-]/g,'')}}`);
   await writeFile(path.join(dist, 'index.html'), render(site, assets), 'utf8');
   const url = site.url.replace(/\/$/, '');

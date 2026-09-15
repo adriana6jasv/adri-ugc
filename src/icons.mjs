@@ -16,6 +16,7 @@ export const icons = {
   check: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
   clock: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
   mapPin: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
-  sparkles: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>',
+  handHelping: '<svg viewBox="0 0 30 34" fill="none" aria-hidden="true" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M13.75 17h2.5a3 3 0 0 0 2.5-3 3 3 0 0 0-2.5-3h-3.75a2 2 0 0 0-1.75 1.05L3.75 19.83m5 5.67 2-1.98a2 2 0 0 1 1.75-.85h5a3.5 3.5 0 0 1 3.5-1.7l5.75-6.23a2.3 2.3 0 0 0-.46-3.23 2.3 2.3 0 0 0-3.23.46l-5.25 5.53M2.5 18.42l7.5 8.5"/></svg>',
+  arrowUpRight: '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11.33 11.33V4.67H4.67M11.33 4.67 4.67 11.33"/></svg>',
   drive: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h16a1 1 0 0 0 .86-1.5L14.3 3.5a1 1 0 0 0-1.72 0L2.14 18.5A1 1 0 0 0 3 20h1z"/><path d="m9.5 10.5 5 8.5M14.5 10.5l-5 8.5"/></svg>'
 };

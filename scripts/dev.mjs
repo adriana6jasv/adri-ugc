@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process';
 import { root, dist, build } from './build.mjs';
 
 const preview = process.argv.includes('--preview');
-const port = Number(process.env.PORT || 4173);
+const port = Number(process.env.PORT || 4174);
 const types = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.mjs':'text/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.webp':'image/webp', '.jpg':'image/jpeg', '.woff2':'font/woff2', '.mp4':'video/mp4', '.vtt':'text/vtt; charset=utf-8', '.txt':'text/plain; charset=utf-8', '.xml':'application/xml' };
 await build();
 const server = createServer(async (req, res) => {

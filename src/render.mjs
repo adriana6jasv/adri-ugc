@@ -9,86 +9,57 @@ const e = value => String(value ?? '').replace(/[&<>"']/g, char => ({
 }[char]));
 
 export function render(site, assets) {
-  const offer = site.collaboration;
+  const mailtoMain = `mailto:${site.email}?subject=${encodeURIComponent('Propuesta UGC / Colaboración - ' + site.name)}`;
   const driveUrl = site.driveUrl || 'https://drive.google.com';
-  const mailtoMain = `mailto:${site.email}?subject=${encodeURIComponent(site.contact?.subject || 'Propuesta UGC / Colaboración - Adriana Seijas')}`;
   const base = site.url ? site.url.replace(/\/$/, '') : '';
 
-  const picture = assets[site.portrait.src]
-    ? `<img class="portrait-image" src="${e(site.portrait.src)}" alt="${e(site.portrait.alt)}" width="720" height="900" fetchpriority="high" decoding="async">`
-    : `<div class="portrait-placeholder" role="img" aria-label="Retrato editorial de Adriana Seijas — Creadora UGC &amp; Comunicadora">
-        <span class="portrait-top">COMUNICACIÓN &amp; UGC</span>
-        <span class="portrait-letter" aria-hidden="true">as.</span>
-        <div class="portrait-bottom">
-          <strong>Adriana Seijas</strong>
-          <small>CREADORA UGC · CDMX</small>
-        </div>
-      </div>`;
+  const renderVideoCard = (item) => {
+    const isReady = Boolean(assets[item.src]);
+    const archClass = item.shape === 'arch' ? 'card-arch-top' : '';
 
-  const renderPiece = (p) => {
-    const ready = assets[p.video];
     return `
-      <article class="work-piece ${e(p.tone)}" id="${e(p.id)}" data-topic="${e(p.topic)}" aria-labelledby="title-${e(p.id)}">
-        <div class="piece-meta">
-          <span class="piece-badge-angle">${e(p.angleTag)}</span>
-          <span class="piece-badge-ratio">FORMATO 9:16</span>
-        </div>
-
-        <div class="film ${ready ? 'is-ready' : 'is-pending'}" ${ready ? 'data-player' : ''}>
-          ${ready ? `
-            <video playsinline muted preload="none" ${assets[p.poster] && !p.poster.endsWith(".svg") ? `poster="${e(p.poster)}"` : ''} aria-label="${e(p.title)}" controls>
-              ${assets[p.captions] ? `<track kind="captions" src="${e(p.captions)}" srclang="es" label="Español" default>` : ''}
-              <source src="${e(p.video)}" type="video/mp4">
-            </video>
-            <button class="big-play" data-toggle aria-label="Reproducir ${e(p.title)}">${icons.play}</button>
-            <div class="player-controls" hidden>
-              <div class="player-buttons">
-                <button data-toggle aria-label="Reproducir">${icons.play}</button>
-                <span class="player-time">0:00 / 0:00</span>
-                <button data-mute aria-label="Activar sonido" aria-pressed="true">${icons.sound}</button>
-                <button data-fullscreen aria-label="Pantalla completa">${icons.fullscreen}</button>
-              </div>
-              <input class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posición del video">
+      <article class="v2-video-card ${archClass}" id="${e(item.id)}" data-player>
+        <div class="video-frame ${archClass}">
+          ${item.statusMock ? `
+            <div class="video-mock-bar" aria-hidden="true">
+              <span class="mock-time">${e(item.statusMock)}</span>
+              <span class="mock-signals">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor"><path d="M1 9h2V7H1v2zm4 0h2V5H5v4zm4 0h2V3H9v6zm4 0h1V1h-1v8z"/></svg>
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0.5" y="0.5" width="13" height="9" rx="2" fill="none" stroke="currentColor"/><path d="M14.5 3.5v3h1v-3h-1z"/><rect x="2" y="2" width="9" height="6" rx="1"/></svg>
+              </span>
             </div>
-            <p class="player-error" role="status" hidden>No se pudo cargar el video. <button data-retry>Volver a intentar</button></p>
-          ` : `
-            <div class="film-cover">
-              <div class="cover-header">
-                <span class="cover-brand">FORMATO 9:16</span>
-                <span class="cover-status">EN PRODUCCIÓN</span>
-              </div>
-              <div class="cover-title" aria-hidden="true">
-                ${p.cover.map((line, j) => `<span${j === 1 ? ' class="italic"' : ''}>${e(line)}</span>`).join('')}
-              </div>
-              <div class="cover-divider" aria-hidden="true"></div>
-              <div class="cover-hook-box">
-                <span class="hook-box-label">Idea de inicio:</span>
-                <p class="hook-box-text">${e(p.hookExample || p.hookSummary || p.objective)}</p>
-              </div>
-              <div class="cover-footer">
-                <span class="cover-objective">${e(p.objective)}</span>
-              </div>
+          ` : ''}
+
+          <div class="video-media">
+            ${isReady ? `
+              <video playsinline muted preload="none" poster="${e(item.poster)}" aria-label="${e(item.title)}">
+                ${assets[item.captions] ? `<track kind="captions" src="${e(item.captions)}" srclang="es" label="Español" default>` : ''}
+                <source src="${e(item.src)}" type="video/mp4">
+              </video>
+            ` : `
+              <img class="video-poster" src="${e(item.poster)}" alt="${e(item.title)} — ${e(item.category)}" loading="lazy" decoding="async">
+            `}
+          </div>
+
+          <div class="video-card-overlay">
+            <div class="overlay-info">
+              <h3 class="video-card-title">${e(item.title)}</h3>
+              <p class="video-card-category">${e(item.category)}</p>
             </div>
-            <span class="pending-label">${icons.camera} Próximamente · Muestra en Grabación</span>
-          `}
-        </div>
-
-        <div class="piece-details">
-          <div class="piece-header">
-            <h3 id="title-${e(p.id)}">${e(p.title)}</h3>
-            <div class="piece-objective-tag"><strong>Objetivo:</strong> ${e(p.objective)}</div>
+            <button class="video-play-btn" data-toggle aria-label="Reproducir video ${e(item.title)}">
+              ${icons.play}
+            </button>
           </div>
-          <p class="piece-desc">${e(p.description)}</p>
 
-          <ul class="tags" aria-label="Etiquetas del creativo">
-            ${p.tags.map(t => `<li>${e(t)}</li>`).join('')}
-          </ul>
-
-          <div class="piece-actions">
-            <a class="download-drive-btn" href="${e(p.downloadUrl || driveUrl)}" target="_blank" rel="noopener noreferrer">
-              ${icons.drive} <span>[Descargar MP4 en Drive ↗]</span>
-            </a>
-          </div>
+          ${isReady ? `
+            <div class="v2-player-controls" hidden>
+              <button class="control-btn" data-toggle aria-label="Pausar o reproducir">${icons.play}</button>
+              <span class="control-time">0:00 / 0:00</span>
+              <input class="control-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progreso del video">
+              <button class="control-btn" data-mute aria-label="Activar sonido">${icons.sound}</button>
+              <button class="control-btn" data-fullscreen aria-label="Pantalla completa">${icons.fullscreen}</button>
+            </div>
+          ` : ''}
         </div>
       </article>
     `;
@@ -98,457 +69,347 @@ export function render(site, assets) {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'WebSite',
-        '@id': `${base}/#website`,
-        url: `${base}/`,
-        name: 'Maternidad con Adri',
-        alternateName: ['Adriana Seijas UGC', 'Maternidad con Adri — Portfolio'],
-        description: site.description,
-        inLanguage: 'es-MX',
-        publisher: { '@id': `${base}/#person` }
-      },
-      {
         '@type': 'Person',
-        '@id': `${base}/#person`,
+        '@id': `${base}/#adriana-seijas`,
         name: site.name,
-        alternateName: ['Adri', 'Maternidad con Adri', 'Adriana Seijas UGC'],
+        alternateName: site.brandName,
         jobTitle: site.role,
         description: site.description,
-        url: `${base}/`,
-        image: `${base}${site.portrait.src}`,
-        email: `mailto:${site.email}`,
-        sameAs: [
-          site.instagramUrl
-        ],
+        url: base,
+        email: site.email,
+        sameAs: [site.instagramUrl],
         knowsAbout: [
           'User Generated Content (UGC)',
-          'Maternidad y Crianza',
-          'Bienestar Familiar',
-          'Video Vertical 9:16',
-          'TikTok Ads',
-          'Instagram Reels',
-          'Periodismo y Comunicación'
-        ],
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: site.city,
-          addressRegion: site.region,
-          addressCountry: 'MX'
-        }
+          'Comunicación y Periodismo',
+          'Marketing de Maternidad y Bienestar',
+          'Producción de Video 4K para Redes Sociales'
+        ]
       },
       {
         '@type': 'ProfessionalService',
         '@id': `${base}/#service`,
-        name: 'Maternidad con Adri — Servicios UGC & Estrategia Creativa',
-        url: `${base}/`,
-        provider: { '@id': `${base}/#person` },
-        image: `${base}/images/og-adri.jpg`,
-        description: site.description,
-        areaServed: [
-          { '@type': 'Country', name: 'Mexico' },
-          { '@type': 'Country', name: 'United States' },
-          { '@type': 'Country', name: 'Spain' }
-        ],
-        priceRange: '$$ (MXN)',
+        name: `${site.name} — ${site.brandName}`,
+        url: base,
+        telephone: '',
+        email: site.email,
+        priceRange: '$$',
+        image: `${base}${site.hero.portrait.src}`,
+        areaServed: {
+          '@type': 'Country',
+          name: 'México'
+        },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'Paquetes de Creación UGC',
-          itemListElement: site.pricing.packages.map(pkg => ({
+          name: 'Paquetes de Producción UGC',
+          itemListElement: site.services.packages.map((pkg, idx) => ({
             '@type': 'Offer',
+            position: idx + 1,
             name: pkg.name,
             description: pkg.summary,
             price: pkg.price.replace(/[^0-9]/g, '') || undefined,
-            priceCurrency: pkg.currency
+            priceCurrency: pkg.currency || 'MXN'
           }))
         }
-      },
-      ...(site.faq ? [{
-        '@type': 'FAQPage',
-        '@id': `${base}/#faq`,
-        mainEntity: site.faq.items.map(item => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer
-          }
-        }))
-      }] : [])
+      }
     ]
   };
 
-  return `<!doctype html>
-<html lang="es-MX">
+  return `<!DOCTYPE html>
+<html lang="es" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>${e(site.title)}</title>
   <meta name="description" content="${e(site.description)}">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="theme-color" content="#f7f4ec">
-  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="${e(site.url)}">
 
-  <!-- Geotargeting & Local Signals (GEO) -->
-  <meta name="geo.region" content="MX-CMX">
-  <meta name="geo.placename" content="Ciudad de México">
-  <meta name="geo.position" content="19.4326;-99.1332">
-  <meta name="ICBM" content="19.4326, -99.1332">
-
-  <!-- Open Graph / Facebook / WhatsApp -->
+  <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_MX">
-  <meta property="og:site_name" content="Maternidad con Adri — Adriana Seijas">
+  <meta property="og:url" content="${e(site.url)}">
   <meta property="og:title" content="${e(site.title)}">
   <meta property="og:description" content="${e(site.description)}">
-  <meta property="og:image" content="${e(base)}/images/og-adri.jpg">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="${e(base + site.hero.portrait.src)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Adriana Seijas | Maternidad con Adri — Creadora UGC y Comunicación">
 
-  <!-- Twitter / X Cards -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${e(site.title)}">
   <meta name="twitter:description" content="${e(site.description)}">
-  <meta name="twitter:image" content="${e(base)}/images/og-adri.jpg">
+  <meta name="twitter:image" content="${e(base + site.hero.portrait.src)}">
 
-  ${base ? `<link rel="canonical" href="${e(base)}/"><meta property="og:url" content="${e(base)}/">\n  <link rel="alternate" type="text/plain" href="${e(base)}/llms.txt" title="LLMs.txt">` : ''}
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-
-  <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
-
+  <!-- Preload Critical Fonts -->
   <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css">
-  <script type="module" src="/main.js"></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <link rel="preload" href="/fonts/dm-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 
-  <header class="site-header wrap">
-    <a class="wordmark" href="#inicio" aria-label="Adriana Seijas, inicio">adri<span>.</span></a>
-    <div class="header-descriptor">
-      <span>Adriana Seijas</span>
-      <span>${e(site.role)} · ${e(site.city)}</span>
+  <!-- Google Fonts Fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/refinements.css">
+
+  <script type="application/ld+json">
+${JSON.stringify(jsonLd, null, 2)}
+  </script>
+</head>
+<body class="theme-v2">
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+  <!-- NAVEGACIÓN SUPERIOR FIGMA -->
+  <header class="site-nav-v2" id="navegacion">
+    <div class="nav-container container">
+      <a href="#" class="brand-link" aria-label="Maternidad con Adri — Inicio">
+        <span class="brand-symbol" aria-hidden="true">${icons.handHelping}</span>
+        <span class="brand-labels">
+          <strong class="brand-title">${e(site.brandName)}</strong>
+          <span class="brand-tag">${e(site.badge)}</span>
+        </span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navegación del sitio">
+        <a href="#videos">Videos</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#paquetes">Paquetes</a>
+        <a href="#sobre-mi">Sobre mí</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#contacto" class="btn-pill btn-pill-outline">
+          <span>Hablemos</span>
+          <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+        </a>
+      </div>
     </div>
-    <nav aria-label="Navegación principal">
-      <a href="#estrategia">Estrategia</a>
-      <a href="#trabajo">Showcase</a>
-      <a href="#entregables">Entregables</a>
-      <a href="#tarifas">Tarifas</a>
-      <a href="#preguntas">Preguntas</a>
-      <a class="nav-contact" href="#contacto">Contacto ${icons.diagonal}</a>
-    </nav>
   </header>
 
-  <main id="main">
-    <!-- HERO SECTION: CRO optimizado con escaneo < 5s -->
-    <section class="hero wrap" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">
-          <span class="hero-name">${e(site.hero.identity)}<span class="name-period">.</span></span>
-          <span class="hero-role-line">${e(site.role)}</span>
-          <span class="hero-tagline">${e(site.hero.headline)}</span>
-        </h1>
+  <main id="contenido-principal">
+    <!-- HERO EDITORIAL FIGMA -->
+    <section class="v2-hero-section container" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <!-- Columna Izquierda: Mensaje y Acciones -->
+        <div class="hero-left-col">
+          <h1 class="hero-display-title" id="hero-title">
+            ${e(site.hero.headline)}
+          </h1>
+          <p class="hero-body-text">
+            ${e(site.hero.subtitle)}
+          </p>
 
-        <!-- MATRIZ OPERATIVA DE ESCANEO RÁPIDO (< 5 SEGUNDOS) -->
-        <div class="hero-matrix" role="region" aria-label="Datos operativos rápidos para marcas y colaboraciones">
-          <div class="matrix-item matrix-highlight">
-            <span class="matrix-icon">${icons.clock}</span>
-            <div class="matrix-text">
-              <span class="matrix-label">Tiempo de Entrega</span>
-              <strong class="matrix-value">${e(site.tat)}</strong>
-            </div>
+          <div class="hero-actions-row">
+            <a href="#videos" class="btn-pill btn-pill-primary">
+              <span>${e(site.hero.ctaPrimary.text)}</span>
+              <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+            </a>
+            <a href="#contacto" class="btn-pill btn-pill-secondary">
+              <span>${e(site.hero.ctaSecondary.text)}</span>
+              <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+            </a>
           </div>
 
-          <div class="matrix-item">
-            <span class="matrix-icon">${icons.mapPin}</span>
-            <div class="matrix-text">
-              <span class="matrix-label">Ubicación</span>
-              <strong class="matrix-value">${e(site.city)}, ${e(site.location)}</strong>
+          <div class="hero-proof-row">
+            <div class="proof-avatars" aria-hidden="true">
+              ${site.hero.socialProof.avatars.map((av, i) => `
+                <img class="avatar-circle av-${i+1}" src="${e(av.src)}" alt="${e(av.alt)}" width="36" height="36" loading="eager">
+              `).join('')}
             </div>
-          </div>
-
-          <div class="matrix-item">
-            <span class="matrix-icon">${icons.sound}</span>
-            <div class="matrix-text">
-              <span class="matrix-label">Idioma</span>
-              <strong class="matrix-value">Español (Nativo)</strong>
-            </div>
-          </div>
-
-          <div class="matrix-item matrix-wide">
-            <span class="matrix-icon">${icons.sparkles}</span>
-            <div class="matrix-text">
-              <span class="matrix-label">Temáticas Principales</span>
-              <strong class="matrix-value">${e(site.profileNiches)}</strong>
-            </div>
-          </div>
-
-          <div class="matrix-item matrix-wide">
-            <span class="matrix-icon">${icons.camera}</span>
-            <div class="matrix-text">
-              <span class="matrix-label">Tipos de Video</span>
-              <strong class="matrix-value">${e(site.servicesList)}</strong>
-            </div>
+            <p class="proof-text">${e(site.hero.socialProof.text)}</p>
           </div>
         </div>
 
-        <p class="hero-intro">${e(site.hero.text)}</p>
-
-        <!-- CTAS PRINCIPALES Y BOTÓN CRO DE COPIAR CORREO -->
-        <div class="hero-actions">
-          <a class="button button-dark" href="${e(mailtoMain)}">
-            <span>${e(site.hero.primary)}</span>
-            ${icons.diagonal}
-          </a>
-          <a class="button button-outline" href="${e(driveUrl)}" target="_blank" rel="noopener noreferrer">
-            <span>${e(site.hero.secondary)}</span>
-            ${icons.drive}
-          </a>
-          <button type="button" class="btn-copy-fast" data-copy-email="${e(site.email)}" title="Copiar correo para pegar">
-            ${icons.copy}
-            <span>Copiar correo</span>
-          </button>
-        </div>
-
-        <div class="hero-contact-strip">
-          <span class="strip-label">Contacto directo:</span>
-          <a class="strip-email" href="${e(mailtoMain)}">${e(site.email)}</a>
-          <span class="strip-sep">·</span>
-          <a class="strip-insta" href="${e(site.instagramUrl)}" target="_blank" rel="noopener noreferrer">${e(site.instagram)} ↗</a>
+        <!-- Columna Derecha: Retrato en Arco -->
+        <div class="hero-right-col">
+          <div class="hero-arch-wrapper">
+            <img class="hero-arch-img" src="${e(site.hero.portrait.src)}" alt="${e(site.hero.portrait.alt)}" width="620" height="740" fetchpriority="high" decoding="async">
+            
+            <div class="hero-floating-card">
+              <strong class="floating-name">${e(site.hero.portrait.name)}</strong>
+              <span class="floating-role">${e(site.hero.portrait.role)}</span>
+            </div>
+          </div>
         </div>
       </div>
-
-      <figure class="hero-portrait">
-        <div class="portrait-frame">
-          ${picture}
-          <div class="portrait-note">
-            <span class="note-kicker">Comunicación Auténtica</span>
-            <p>Conectar.<br><em>Transmitir.</em><br>Convencer.</p>
-            <span class="note-signature" aria-hidden="true">Adri</span>
-          </div>
-        </div>
-        <figcaption>
-          <span>Adriana Seijas · Creadora UGC &amp; Comunicadora</span>
-          <span>${e(site.city)}</span>
-        </figcaption>
-      </figure>
     </section>
 
-    <!-- VALUE PROPOSITION SECTION: Estrategia y Comunicación -->
-    <section class="value-prop wrap" id="estrategia" aria-labelledby="strat-title">
-      <div class="section-badge">${e(site.valueProposition.title)}</div>
-      <div class="section-intro">
-        <h2 id="strat-title">Más que un video bonito: <em>comunicación natural que conecta y genera confianza.</em></h2>
-        <p class="lead-text">${e(site.valueProposition.text)}</p>
+    <!-- SECCIÓN DE VIDEOS REALES FIGMA -->
+    <section class="v2-videos-section container" id="videos" aria-labelledby="videos-heading">
+      <div class="videos-header-split">
+        <h2 class="section-display-h2" id="videos-heading">
+          ${e(site.videos.title)}
+        </h2>
+        <p class="section-subtitle-p">
+          ${e(site.videos.subtitle)}
+        </p>
       </div>
 
-      <div class="pillars-grid">
-        ${site.valueProposition.pillars.map(p => `
-          <div class="pillar-card">
-            <span class="pillar-number">${e(p.number)}</span>
-            <h3>${e(p.title)}</h3>
-            <p>${e(p.text)}</p>
-          </div>
-        `).join('')}
+      <div class="v2-videos-grid">
+        ${site.videos.items.map(renderVideoCard).join('')}
       </div>
 
-      <div class="modes-container">
-        <h3 class="modes-title">Dos formas de colaborar según lo que necesites</h3>
-        <div class="modes-grid">
-          ${offer.modes.map((m, idx) => `
-            <article class="mode-card ${idx === 0 ? 'mode-primary' : ''}">
-              <div class="mode-top">
-                <span class="mode-badge">${e(m.badge)}</span>
-                <span class="mode-order">Opción ${idx + 1}</span>
-              </div>
-              <h4 class="mode-name">${e(m.title)}</h4>
-              <p class="mode-tagline">${e(m.tagline)}</p>
-              <p class="mode-desc">${e(m.text)}</p>
-            </article>
+      <div class="videos-bottom-action">
+        <a href="${e(driveUrl)}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-outline">
+          <span>${e(site.videos.ctaMore.text)}</span>
+          <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE SERVICIOS Y PAQUETES FIGMA -->
+    <section class="v2-services-section container" id="servicios" aria-labelledby="services-heading">
+      <div class="services-header-split">
+        <h2 class="section-display-h2" id="services-heading">
+          ${e(site.services.title)}
+        </h2>
+        <div class="process-steps-row" aria-label="Etapas de trabajo">
+          ${site.services.process.map(step => `
+            <div class="step-pill">
+              <span class="step-num">${e(step.num)}</span>
+              <span class="step-name">${e(step.title)}</span>
+            </div>
           `).join('')}
         </div>
       </div>
-    </section>
 
-    <!-- VIDEO SHOWCASE SECTION -->
-    <section class="work wrap" id="trabajo" aria-labelledby="work-title">
-      <div class="section-badge">Video Showcase</div>
-      <div class="section-intro">
-        <h2 id="work-title">${e(site.work.title)}</h2>
-        <p>${e(site.work.intro)}</p>
-      </div>
-
-      <div class="work-grid">
-        ${site.work.pieces.map(renderPiece).join('')}
-      </div>
-    </section>
-
-    <!-- SERVICIOS Y ENTREGABLES -->
-    <section class="deliverables wrap" id="entregables" aria-labelledby="deliv-title">
-      <div class="section-badge">Detalles de Entrega</div>
-      <div class="section-intro">
-        <h2 id="deliv-title">${e(site.deliverables.title)}</h2>
-        <p>${e(site.deliverables.intro)}</p>
-      </div>
-
-      <div class="deliverables-grid">
-        ${site.deliverables.items.map(item => `
-          <div class="deliverable-card">
-            <div class="deliv-icon">${icons[item.iconKey] || icons.check}</div>
-            <div class="deliv-text">
-              <h3>${e(item.title)}</h3>
-              <p>${e(item.description)}</p>
+      <div class="v2-packages-grid" id="paquetes">
+        ${site.services.packages.map(pkg => `
+          <article class="v2-package-card ${pkg.featured ? 'is-featured-arch' : ''}">
+            <div class="package-head">
+              <h3 class="package-name">${e(pkg.name)}</h3>
+              <p class="package-summary">${e(pkg.summary)}</p>
             </div>
-          </div>
-        `).join('')}
-      </div>
-    </section>
 
-    <!-- TARIFAS Y PAQUETES BASE (En MXN con Facturación Fiscal) -->
-    <section class="pricing wrap" id="tarifas" aria-labelledby="pricing-title">
-      <div class="section-badge">Tarifas &amp; Paquetes</div>
-      <div class="section-intro">
-        <h2 id="pricing-title">${e(site.pricing.title)}</h2>
-        <p>${e(site.pricing.intro)}</p>
-      </div>
-
-      <div class="pricing-grid">
-        ${site.pricing.packages.map(pkg => `
-          <article class="pricing-card ${pkg.popular ? 'is-popular' : ''}">
-            ${pkg.popular ? `<div class="card-pop-badge">${icons.sparkles} ${e(pkg.badge)}</div>` : `<div class="card-std-badge">${e(pkg.badge)}</div>`}
-            <div class="pkg-head">
-              <h3 class="pkg-title">${e(pkg.name)}</h3>
-              <div class="pkg-qty">${e(pkg.quantity)}</div>
-              <div class="pkg-price-box">
-                <span class="price-val">${e(pkg.price)}</span>
-                <span class="price-curr">${e(pkg.currency)}</span>
-              </div>
+            <div class="package-pricing">
+              <span class="package-price">${e(pkg.price)}</span>
+              <span class="package-qty">${e(pkg.quantity)}</span>
             </div>
-            <p class="pkg-summary">${e(pkg.summary)}</p>
-            <ul class="pkg-features" aria-label="Qué incluye este paquete">
-              ${pkg.features.map(f => `<li>${icons.check} <span>${e(f)}</span></li>`).join('')}
+
+            <p class="package-deliverable">${e(pkg.deliverable)}</p>
+
+            <ul class="package-features-list" aria-label="Inclusiones de ${e(pkg.name)}">
+              ${pkg.features.map(f => `
+                <li><span class="check-icon" aria-hidden="true">${icons.check}</span> <span>${e(f)}</span></li>
+              `).join('')}
             </ul>
-            <a class="button ${pkg.popular ? 'button-dark' : 'button-outline'} pkg-cta-btn" href="mailto:${e(site.email)}?subject=${encodeURIComponent(`Solicitud ${pkg.name} - Adriana Seijas`)}">
-              <span>${e(pkg.ctaText)}</span>
-              ${icons.diagonal}
-            </a>
+
+            <div class="package-btn-wrap">
+              <a href="#contacto" class="btn-pill ${pkg.featured ? 'btn-pill-white' : 'btn-pill-outline'}">
+                <span>${e(pkg.ctaText)}</span>
+                <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+              </a>
+            </div>
           </article>
         `).join('')}
       </div>
 
-      <div class="pricing-footnotes">
-        <div class="footnote-item">
-          <span class="fn-icon">${icons.shield}</span>
-          <p><strong>Facturación Electrónica:</strong> ${e(site.pricing.billingNote)}</p>
+      <div class="services-footer-bar">
+        <p class="services-custom-note">${e(site.services.customNote)}</p>
+        <div class="services-status-wrap">
+          <span class="agenda-badge">${e(site.services.statusBadge)}</span>
         </div>
-        <div class="footnote-item">
-          <span class="fn-icon">${icons.arrow}</span>
-          <p><strong>Flexibilidad:</strong> ${e(site.pricing.flexibilityNote)}</p>
+      </div>
+      <p class="billing-tax-note">${e(site.services.billingNote)}</p>
+    </section>
+
+    <!-- SECCIÓN DE PRUEBA SOCIAL Y CONTACTO FIGMA -->
+    <section class="v2-proof-contact-section" id="sobre-mi">
+      <!-- Fila Superior: Testimonio de Cliente -->
+      <div class="client-proof-banner container">
+        <div class="proof-photo-col">
+          <img class="proof-campaign-img" src="${e(site.proofAndContact.campaignImage)}" alt="Colaboración UGC de Adriana Seijas con marca de bienestar" width="680" height="460" loading="lazy">
+        </div>
+        <div class="proof-quote-col">
+          <blockquote class="proof-blockquote">
+            ${e(site.proofAndContact.quote)}
+          </blockquote>
+          <div class="proof-meta-row">
+            <span class="proof-author">${e(site.proofAndContact.author)}</span>
+            <span class="proof-badge">${e(site.proofAndContact.badge)}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila Inferior: Invitación a Colaborar / Tarjeta Flotante -->
+      <div class="contact-terracotta-band" id="contacto">
+        <div class="contact-inner container">
+          <div class="contact-copy-col">
+            <h2 class="contact-headline">
+              ${e(site.proofAndContact.headline)}
+            </h2>
+            <p class="contact-subtext">
+              ${e(site.proofAndContact.subtitle)}
+            </p>
+          </div>
+
+          <div class="contact-card-col">
+            <div class="floating-contact-card">
+              <div class="card-head-row">
+                <span class="card-title">${e(site.proofAndContact.floatingCard.title)}</span>
+                <span class="card-tat">${e(site.proofAndContact.floatingCard.tat)}</span>
+              </div>
+              <div class="card-divider" aria-hidden="true"></div>
+              <a class="card-email-link" href="${e(mailtoMain)}">
+                ${e(site.proofAndContact.floatingCard.email)}
+              </a>
+              <div class="card-btn-row">
+                <a class="btn-pill btn-pill-primary" href="${e(mailtoMain)}">
+                  <span>${e(site.proofAndContact.floatingCard.ctaText)}</span>
+                  <span class="icon-arr" aria-hidden="true">${icons.arrowUpRight}</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PREGUNTAS FRECUENTES (FAQ & GEO OPTIMIZATION) -->
-    ${site.faq ? `
-    <section class="faq wrap" id="preguntas" aria-labelledby="faq-title">
-      <div class="section-badge">Preguntas Frecuentes</div>
-      <div class="section-intro">
-        <h2 id="faq-title">${e(site.faq.title)}</h2>
-        <p>${e(site.faq.intro)}</p>
+    <!-- SECCIÓN PREGUNTAS FRECUENTES (CONSERVA COPYS V1) -->
+    <section class="v2-faq-section container" id="faq" aria-labelledby="faq-title">
+      <div class="faq-header">
+        <h2 class="section-display-h2" id="faq-title">${e(site.faq.title)}</h2>
+        <p class="section-subtitle-p">${e(site.faq.intro)}</p>
       </div>
 
-      <div class="faq-accordion">
+      <div class="faq-grid">
         ${site.faq.items.map((item, idx) => `
-          <details class="faq-item"${idx === 0 ? ' open' : ''}>
-            <summary class="faq-summary">
-              <span class="faq-question">${e(item.question)}</span>
-              <span class="faq-icon" aria-hidden="true">${icons.down}</span>
+          <details class="faq-accordion-item" ${idx === 0 ? 'open' : ''}>
+            <summary class="faq-question">
+              <span>${e(item.question)}</span>
+              <span class="faq-toggle-icon" aria-hidden="true">+</span>
             </summary>
-            <div class="faq-content">
+            <div class="faq-answer">
               <p>${e(item.answer)}</p>
             </div>
           </details>
         `).join('')}
       </div>
     </section>
-    ` : ''}
-
-    <!-- FOOTER / CONTACTO RÁPIDO (Cero Fricción) -->
-    <section class="contact-section wrap" id="contacto" aria-labelledby="contact-title">
-      <div class="contact-card">
-        <div class="contact-header">
-          <span class="contact-kicker">Hablemos de tu marca</span>
-          <h2 id="contact-title">${e(site.contact.title)}<br><em>${e(site.contact.emphasis)}</em></h2>
-          <p class="contact-desc">${e(site.contact.text)}</p>
-        </div>
-
-        <div class="contact-body">
-          <div class="contact-box-primary">
-            <span class="box-tag">Correo Electrónico (Respuesta en menos de 24h)</span>
-            <div class="email-copy-wrapper">
-              <a class="selectable-email" href="${e(mailtoMain)}" title="Hacer clic para redactar correo">${e(site.contact.directEmail)}</a>
-              <button type="button" class="btn-copy-chip" data-copy-email="${e(site.contact.directEmail)}" title="Copiar correo al portapapeles">
-                ${icons.copy}
-                <span>Copiar</span>
-              </button>
-            </div>
-            <p class="contact-prompt-note">${e(site.contact.prompt)}</p>
-            <div class="contact-btn-row">
-              <a class="button button-white" href="${e(mailtoMain)}">
-                <span>Escribir por Correo</span>
-                ${icons.diagonal}
-              </a>
-            </div>
-          </div>
-
-          <div class="contact-box-secondary">
-            <span class="box-tag">Material y Enlaces</span>
-            <ul class="quick-links-list">
-              <li>
-                <a href="${e(driveUrl)}" target="_blank" rel="noopener noreferrer">
-                  <span class="ql-icon">${icons.drive}</span>
-                  <div>
-                    <strong>Carpeta Google Drive ↗</strong>
-                    <span>Videos de muestra y recursos</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="${e(site.instagramUrl)}" target="_blank" rel="noopener noreferrer">
-                  <span class="ql-icon">${icons.camera}</span>
-                  <div>
-                    <strong>Instagram (${e(site.instagram)}) ↗</strong>
-                    <span>Contenido sobre maternidad y vida cotidiana</span>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer wrap">
-    <div class="footer-brand">
-      <a class="wordmark" href="#inicio" aria-label="Adriana Seijas">adri<span>.</span></a>
-      <p><strong>Adriana Seijas</strong><br>${e(site.role)}<br>${e(site.city)}, ${e(site.location)}</p>
+  <!-- PIE DE PÁGINA FIGMA -->
+  <footer class="v2-site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand-col">
+        <div class="footer-logo">
+          <span class="footer-symbol" aria-hidden="true">${icons.handHelping}</span>
+          <span class="footer-brand-text">${e(site.footer.brand)}</span>
+        </div>
+        <p class="footer-copyright">${e(site.footer.copyright)}</p>
+      </div>
+
+      <div class="footer-links-col">
+        <div class="footer-nav-links">
+          <a href="${e(site.footer.instagramUrl)}" target="_blank" rel="noopener noreferrer">${e(site.footer.instagram)}</a>
+          <a href="mailto:${e(site.footer.email)}">${e(site.footer.email)}</a>
+        </div>
+        <p class="footer-tagline-serif">${e(site.footer.tagline)}</p>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="${e(driveUrl)}" target="_blank" rel="noopener noreferrer">Google Drive ↗</a>
-      <a href="${e(site.instagramUrl)}" target="_blank" rel="noopener noreferrer">Instagram ${e(site.instagram)} ↗</a>
-      <a href="${e(mailtoMain)}">${e(site.email)}</a>
-    </div>
-    <a class="back-top" href="#inicio">Volver arriba ${icons.down}</a>
   </footer>
 
-  <!-- TOAST FEEDBACK FOR COPY-TO-CLIPBOARD -->
-  <div id="toast" class="toast" role="status" aria-live="polite" hidden>
-    ${icons.check} <span>¡Correo copiado al portapapeles!</span>
-  </div>
+  <script src="/main.js" type="module"></script>
 </body>
-</html>`;
+</html>
+`;
 }
-
