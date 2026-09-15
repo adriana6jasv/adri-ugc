@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ADRIANA SEIJAS — PORTFOLIO EDITORIAL UGC (v2)
+   ADRIANA SEIJAS — PORTFOLIO EDITORIAL UGC (v2 Polished)
    Design System: Editorial Lifestyle, Warm Ivory, Asymmetric High-Whitespace
    ========================================================================== */
 
@@ -41,7 +41,7 @@
   --bg-surface: #ffffff;
   --bg-card: #f4efe7;
   --bg-card-subtle: #f8f5ee;
-  --bg-dark: #191614;
+  --bg-dark: #181513;
   
   --text: #1a1715;
   --text-muted: #5e574f;
@@ -55,7 +55,7 @@
 
   --olive: #43493b;
   --border: rgba(26, 23, 21, 0.09);
-  --border-strong: rgba(26, 23, 21, 0.18);
+  --border-strong: rgba(26, 23, 21, 0.16);
   --border-on-dark: rgba(251, 249, 245, 0.14);
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -70,7 +70,7 @@
 
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --shadow-subtle: 0 4px 20px -2px rgba(26, 23, 21, 0.04);
-  --shadow-media: 0 16px 40px -10px rgba(26, 23, 21, 0.12);
+  --shadow-media: 0 20px 48px -12px rgba(26, 23, 21, 0.15);
 }
 
 *, *::before, *::after {
@@ -128,8 +128,8 @@ body.editorial-body {
   max-width: var(--container);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 28px;
-  padding-right: 28px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 /* Typography elements */
@@ -153,7 +153,7 @@ a {
 .section-label {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -174,7 +174,7 @@ a {
   left: 0;
   right: 0;
   height: var(--header-height);
-  background: rgba(251, 249, 245, 0.88);
+  background: rgba(251, 249, 245, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -276,7 +276,7 @@ a {
   color: var(--text);
   background: transparent;
   border: 1px solid var(--border-strong);
-  padding: 9px 20px;
+  padding: 9px 22px;
   border-radius: var(--radius-pill);
   transition: all 0.25s var(--ease-editorial);
 }
@@ -301,8 +301,8 @@ a {
    01 — HERO EDITORIAL
    ========================================================================== */
 .editorial-hero {
-  padding-top: 72px;
-  padding-bottom: 110px;
+  padding-top: 80px;
+  padding-bottom: 120px;
 }
 
 .hero-editorial-layout {
@@ -339,21 +339,21 @@ a {
 }
 
 .hero-statement {
-  font-size: clamp(40px, 5.2vw, 68px);
+  font-size: clamp(42px, 5.4vw, 70px);
   line-height: 1.04;
   letter-spacing: -0.025em;
   color: var(--text);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   max-width: 620px;
 }
 
 .hero-narrative {
   font-family: var(--font-sans);
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-size: clamp(16.5px, 1.35vw, 19px);
   line-height: 1.55;
   color: var(--text-muted);
-  margin-bottom: 40px;
-  max-width: 540px;
+  margin-bottom: 38px;
+  max-width: 520px;
 }
 
 .hero-cta-group {
@@ -452,7 +452,7 @@ a {
   bottom: 18px;
   left: 18px;
   right: 18px;
-  background: rgba(25, 22, 20, 0.72);
+  background: rgba(24, 21, 19, 0.76);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -475,35 +475,35 @@ a {
   font-family: var(--font-sans);
   font-size: 11.5px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.8);
   letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
-   02 — SPOTLIGHT WORK
+   02 — SPOTLIGHT WORK (Visual & Ampliado)
    ========================================================================== */
 .editorial-spotlight {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 130px;
   border-top: 1px solid var(--border);
 }
 
 .spotlight-intro-header {
-  margin-bottom: 80px;
+  margin-bottom: 84px;
   max-width: 720px;
 }
 
 .spotlight-main-heading {
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: clamp(36px, 4.2vw, 54px);
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .spotlight-intro-text {
   font-family: var(--font-sans);
-  font-size: 17.5px;
+  font-size: 18px;
   line-height: 1.55;
   color: var(--text-muted);
 }
@@ -511,18 +511,18 @@ a {
 .spotlight-cases-flow {
   display: flex;
   flex-direction: column;
-  gap: 110px;
+  gap: 120px;
 }
 
 .spotlight-case {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 64px;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
   align-items: center;
 }
 
 .spotlight-case.is-reversed {
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 420px;
 }
 
 .spotlight-case.is-reversed .spotlight-media-col {
@@ -541,7 +541,7 @@ a {
 .spotlight-video-frame {
   position: relative;
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -567,10 +567,10 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: none;
@@ -580,7 +580,7 @@ a {
   justify-content: center;
   color: var(--text);
   transition: all 0.25s var(--ease-editorial);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   z-index: 5;
 }
 
@@ -596,8 +596,8 @@ a {
 }
 
 .play-icon-inner svg {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   margin-left: 3px;
 }
 
@@ -650,104 +650,101 @@ a {
 
 /* Spotlight Story Column */
 .spotlight-story-col {
-  padding: 20px 0;
-  max-width: 580px;
+  padding: 12px 0;
+  max-width: 520px;
 }
 
 .spotlight-num {
   font-family: var(--font-serif);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--terracotta);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .spotlight-title {
-  font-size: clamp(28px, 3.2vw, 42px);
+  font-size: clamp(32px, 3.4vw, 46px);
   line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--text);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .spotlight-hook-copy {
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(19px, 1.8vw, 24px);
-  line-height: 1.4;
-  color: var(--olive);
-  margin-bottom: 20px;
+  font-size: clamp(21px, 2vw, 27px);
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 28px;
 }
 
-.spotlight-desc {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin-bottom: 32px;
+.spotlight-hook-copy strong {
+  font-weight: 500;
 }
 
-.spotlight-capabilities-wrap {
+.spotlight-tags-wrap {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.capabilities-label {
+.tags-label {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-subtle);
 }
 
-.capabilities-tags {
+.spotlight-tags {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
 }
 
-.capabilities-tags li {
+.spotlight-tags li {
   font-family: var(--font-sans);
   font-size: 12.5px;
   font-weight: 500;
+  color: var(--text-muted);
   background: var(--bg-card);
-  color: var(--text);
   border: 1px solid var(--border);
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
 }
 
 /* ==========================================================================
-   03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque)
+   03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque: 4 Puntos Fuertes)
    ========================================================================== */
 .editorial-differential {
-  padding-top: 110px;
+  padding-top: 120px;
   padding-bottom: 130px;
   border-top: 1px solid var(--border);
 }
 
 .differential-header {
   max-width: 820px;
-  margin-bottom: 72px;
+  margin-bottom: 64px;
 }
 
 .differential-statement {
-  font-size: clamp(34px, 4.2vw, 56px);
+  font-size: clamp(36px, 4.4vw, 58px);
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .differential-intro {
   font-family: var(--font-sans);
-  font-size: 17.5px;
+  font-size: 18px;
   line-height: 1.55;
   color: var(--text-muted);
 }
@@ -755,12 +752,12 @@ a {
 .differential-editorial-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px 64px;
+  gap: 48px 64px;
 }
 
 .differential-row {
   display: flex;
-  gap: 24px;
+  gap: 22px;
   align-items: flex-start;
   padding-bottom: 28px;
   border-bottom: 1px solid var(--border);
@@ -768,11 +765,11 @@ a {
 
 .diff-num {
   font-family: var(--font-serif);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--terracotta);
-  line-height: 1;
-  min-width: 32px;
+  line-height: 1.1;
+  min-width: 28px;
 }
 
 .diff-content {
@@ -783,32 +780,32 @@ a {
 
 .diff-title {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--text);
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .diff-desc {
   font-family: var(--font-sans);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
 /* ==========================================================================
-   04 — FORMAS DE TRABAJAR
+   04 — FORMAS DE TRABAJAR (2 Opciones Limpias)
    ========================================================================== */
 .editorial-working {
-  padding-top: 110px;
+  padding-top: 120px;
   padding-bottom: 130px;
   border-top: 1px solid var(--border);
 }
 
 .working-header {
   max-width: 680px;
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .working-heading {
@@ -821,7 +818,7 @@ a {
 
 .working-intro {
   font-family: var(--font-sans);
-  font-size: 17.5px;
+  font-size: 18px;
   line-height: 1.55;
   color: var(--text-muted);
 }
@@ -830,14 +827,14 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 36px;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 
 .working-option-col {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 48px 40px;
+  padding: 44px 38px;
   display: flex;
   flex-direction: column;
   transition: transform 0.25s var(--ease-editorial), border-color 0.25s var(--ease-editorial);
@@ -854,7 +851,7 @@ a {
   font-weight: 500;
   color: var(--terracotta);
   line-height: 1;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .opt-title {
@@ -868,12 +865,12 @@ a {
 
 .opt-sub {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--olive);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   display: block;
 }
 
@@ -887,7 +884,7 @@ a {
 .working-footnotes {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   padding-top: 24px;
   border-top: 1px solid var(--border);
   max-width: 820px;
@@ -909,7 +906,7 @@ a {
    05 — CAPABILITIES & NICHO
    ========================================================================== */
 .editorial-index {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 120px;
   border-top: 1px solid var(--border);
 }
@@ -929,7 +926,7 @@ a {
   line-height: 1.15;
   letter-spacing: -0.015em;
   color: var(--text);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .index-list {
@@ -938,12 +935,12 @@ a {
   margin: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px 24px;
+  gap: 14px 24px;
 }
 
 .index-list li {
   font-family: var(--font-sans);
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text-muted);
   display: flex;
@@ -982,12 +979,12 @@ a {
 }
 
 .contact-hero-statement {
-  font-size: clamp(38px, 5.2vw, 68px);
+  font-size: clamp(40px, 5.4vw, 70px);
   line-height: 1.05;
   letter-spacing: -0.025em;
   color: var(--text-on-dark);
   margin-top: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .contact-supporting-copy {
@@ -995,8 +992,8 @@ a {
   font-size: clamp(17px, 1.4vw, 20px);
   line-height: 1.55;
   color: var(--text-on-dark-muted);
-  margin-bottom: 48px;
-  max-width: 600px;
+  margin-bottom: 44px;
+  max-width: 580px;
 }
 
 .contact-direct-action {
@@ -1004,13 +1001,13 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  margin-bottom: 56px;
+  margin-bottom: 52px;
   width: 100%;
 }
 
 .contact-email-hero {
   font-family: var(--font-serif);
-  font-size: clamp(26px, 3.8vw, 48px);
+  font-size: clamp(28px, 4vw, 50px);
   color: #ffffff;
   letter-spacing: -0.01em;
   position: relative;
@@ -1035,7 +1032,7 @@ a {
   gap: 10px;
   background: var(--bg-surface);
   color: var(--bg-dark);
-  padding: 15px 32px;
+  padding: 15px 34px;
   border-radius: var(--radius-pill);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -1158,7 +1155,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 20px;
+  gap: 18px;
 }
 
 .footer-links {
@@ -1209,7 +1206,7 @@ a {
   .spotlight-case,
   .spotlight-case.is-reversed {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 28px;
   }
 
   .spotlight-case.is-reversed .spotlight-media-col {
@@ -1218,6 +1215,10 @@ a {
 
   .spotlight-case.is-reversed .spotlight-story-col {
     order: 0;
+  }
+
+  .spotlight-video-frame {
+    max-width: 380px;
   }
 
   .spotlight-story-col {
@@ -1276,18 +1277,18 @@ a {
   }
 
   .editorial-hero {
-    padding-top: 40px;
-    padding-bottom: 72px;
+    padding-top: 36px;
+    padding-bottom: 64px;
   }
 
   .hero-statement {
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-size: 34px;
+    margin-bottom: 18px;
   }
 
   .hero-narrative {
     font-size: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
   }
 
   .hero-cta-group {
@@ -1303,11 +1304,22 @@ a {
   }
 
   .spotlight-cases-flow {
-    gap: 72px;
+    gap: 64px;
   }
 
   .spotlight-video-frame {
     max-width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .spotlight-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .spotlight-hook-copy {
+    font-size: 20px;
+    margin-bottom: 20px;
   }
 
   .working-option-col {

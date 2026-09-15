@@ -20,6 +20,7 @@ for (const match of html.matchAll(/href="#([^"]+)"/g)) {
 // 3. Estructura semántica
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Debe haber exactamente un H1 editorial');
 assert.equal((html.match(/<article class="spotlight-case\b/g) || []).length, 3, 'Deben existir exactamente tres artículos de video (spotlights)');
+assert.equal((html.match(/class="differential-row"/g) || []).length, 4, 'Deben existir exactamente cuatro filas en El Enfoque');
 
 // 4. Contacto y Redes
 assert(html.includes('mailto:adriana6jasv@gmail.com'), 'Email de contacto presente');
@@ -36,6 +37,7 @@ assert(html.includes('México'), 'Mención de México presente');
 assert(html.includes('Contenido que se siente vivido, no producido.'), 'Tagline esencial presente');
 assert(html.includes('No sólo crea contenido. Sabe cómo contarlo.'), 'Manifesto diferencial presente');
 assert(html.includes('Mamá real + formación en Comunicación y Periodismo'), 'Diferenciador presente');
+assert(html.includes('Creo historias cotidianas donde el producto entra con naturalidad y la recomendación se siente real.'), 'Hero copy humanizado presente');
 assert(html.includes('Facturación'), 'Mención de facturación fiscal SAT');
 
 // 7. Todos los assets referenciados deben existir en dist
@@ -71,4 +73,4 @@ for (const file of await readdir(path.join(dist, 'fonts'))) {
 
 const files = ['index.html', 'styles.css', 'main.js', 'icons.mjs'];
 const bytes = (await Promise.all(files.map(f => stat(path.join(dist, f))))).reduce((a, s) => a + s.size, 0);
-console.log(`OK: verificación editorial exitosa de la v2. Anclas, assets, copys de v2 verificados y fuentes WOFF2. Total HTML + CSS + JS: ${(bytes / 1024).toFixed(1)} KB.`);
+console.log(`OK: verificación editorial pulida exitosa. Anclas, 3 spotlights visuales, 4 enfoques, copys humanizados y fuentes WOFF2. Total HTML + CSS + JS: ${(bytes / 1024).toFixed(1)} KB.`);

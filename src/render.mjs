@@ -6,7 +6,7 @@ const e = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '>': '&gt;',
   '"': '&quot;',
   "'": '&#39;'
-}[char]));
+})[char]);
 
 export function render(site, assets) {
   const mailtoMain = `mailto:${site.email}?subject=${encodeURIComponent('Colaboración UGC - Adriana Seijas')}`;
@@ -50,13 +50,12 @@ export function render(site, assets) {
         <div class="spotlight-story-col">
           <span class="spotlight-num">${e(piece.number)}</span>
           <h3 class="spotlight-title">${e(piece.title)}</h3>
-          <p class="spotlight-hook-copy">“${e(piece.copy)}”</p>
-          <p class="spotlight-desc">${e(piece.description)}</p>
+          <p class="spotlight-hook-copy"><strong>${e(piece.copy)}</strong></p>
 
-          <div class="spotlight-capabilities-wrap">
-            <span class="capabilities-label">Capabilities:</span>
-            <ul class="capabilities-tags" aria-label="Capabilities de ${e(piece.title)}">
-              ${piece.capabilities.map(cap => `<li>${e(cap)}</li>`).join('')}
+          <div class="spotlight-tags-wrap">
+            <span class="tags-label">Tags:</span>
+            <ul class="spotlight-tags" aria-label="Tags de ${e(piece.title)}">
+              ${piece.tags.map(tag => `<li>${e(tag)}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -155,13 +154,13 @@ ${JSON.stringify(jsonLd, null, 2)}
 
       <nav class="header-nav" aria-label="Navegación principal">
         <a href="#trabajo">Trabajo</a>
-        <a href="#sobre-adri">Sobre Adri</a>
+        <a href="#sobre-adri">El Enfoque</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
       <div class="header-cta-wrap">
         <a href="#contacto" class="editorial-link-btn">
-          <span>Trabajemos juntos</span>
+          <span>Hablemos</span>
           <span class="arrow-svg" aria-hidden="true">${icons.arrowUpRight}</span>
         </a>
       </div>
@@ -210,7 +209,7 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 02 — SPOTLIGHT WORK (Inmediato) -->
+    <!-- 02 — SPOTLIGHT WORK (Inmediato & Visual) -->
     <section class="editorial-spotlight container" id="trabajo" aria-labelledby="spotlight-title">
       <div class="spotlight-intro-header">
         <span class="section-label">02 / Spotlight Work</span>
@@ -227,7 +226,7 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 03 — DIFERENCIAL TIPOGRÁFICO -->
+    <!-- 03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque: 4 Ideas Clave) -->
     <section class="editorial-differential container" id="sobre-adri" aria-labelledby="differential-title">
       <div class="differential-header">
         <span class="section-label">03 / El Enfoque</span>
@@ -252,7 +251,7 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 04 — FORMAS DE TRABAJAR -->
+    <!-- 04 — FORMAS DE TRABAJAR (2 Modalidades Limpias) -->
     <section class="editorial-working container" id="colaboracion" aria-labelledby="working-title">
       <div class="working-header">
         <span class="section-label">04 / Colaboración</span>
