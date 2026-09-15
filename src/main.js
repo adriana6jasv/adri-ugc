@@ -15,12 +15,19 @@ for (const player of players) {
   let seeking = false;
 
   if (video) {
+    let userPrefersMuted = false;
+
     const update = () => {
       player.classList.toggle('is-playing', !video.paused);
       toggles.forEach(button => {
-        button.innerHTML = video.paused 
-          ? `<span class="play-icon-inner" aria-hidden="true">${icons.play}</span>` 
-          : `<span class="play-icon-inner" aria-hidden="true">${icons.pause}</span>`;
+        const isCenterBtn = button.classList.contains('spotlight-play-btn');
+        if (isCenterBtn) {
+          button.innerHTML = video.paused 
+            ? `<span class="play-icon-inner" aria-hidden="true">${icons.play}</span>` 
+            : `<span class="play-icon-inner" aria-hidden="true">${icons.pause}</span>`;
+        } else {
+          button.innerHTML = video.paused ? icons.play : icons.pause;
+        }
         button.setAttribute('aria-label', `${video.paused ? 'Reproducir' : 'Pausar'} video`);
       });
       if (time) time.textContent = `${clock(video.currentTime)} / ${clock(video.duration)}`;
@@ -31,24 +38,40 @@ for (const player of players) {
       }
     };
 
-    const play = async () => {
+    const pauseOthers = () => {
       players.forEach(other => {
         if (other !== player) {
           const otherVid = other.querySelector('video');
-          if (otherVid && !otherVid.paused) otherVid.pause();
+          if (otherVid && !otherVid.paused) {
+            otherVid.pause();
+          }
         }
       });
-      // User explicitly initiated playback: attempt unmuted playback
-      video.muted = false;
+    };
+
+    const play = async () => {
+      pauseOthers();
+
+      if (!video.currentSrc && !video.src) {
+        const source = video.querySelector('source');
+        if (source && source.src) video.src = source.src;
+      }
+
+      if (!userPrefersMuted) {
+        video.muted = false;
+      }
+
       try {
         await video.play();
       } catch (err) {
-        // Fallback to muted playback if browser autoplay/sound policy restricts
+        // Fallback no bloqueante a reproducción silenciada si la política de autoplay restringe audio
         video.muted = true;
         try {
           await video.play();
         } catch (e2) {
-          if (e2.name !== 'AbortError') console.warn(e2);
+          if (e2.name !== 'AbortError') {
+            console.warn('Playback error:', e2);
+          }
         }
       }
       update();
@@ -65,12 +88,7 @@ for (const player of players) {
       toggle();
     });
     video.addEventListener('play', () => {
-      players.forEach(other => {
-        if (other !== player) {
-          const otherVid = other.querySelector('video');
-          if (otherVid && !otherVid.paused) otherVid.pause();
-        }
-      });
+      pauseOthers();
       update();
     });
     video.addEventListener('ended', () => {
@@ -82,6 +100,7 @@ for (const player of players) {
       mute.addEventListener('click', (e) => {
         e.stopPropagation();
         video.muted = !video.muted;
+        userPrefersMuted = video.muted;
         update();
       });
     }

@@ -22,7 +22,7 @@ export function render(site, assets) {
           <div class="spotlight-video-frame">
             <div class="spotlight-media-wrap">
               ${isReady ? `
-                <video playsinline muted preload="none" poster="${e(piece.poster)}" aria-label="${e(piece.title)}">
+                <video src="${e(piece.video)}" playsinline muted preload="metadata" poster="${e(piece.poster)}" aria-label="${e(piece.title)}">
                   ${assets[piece.captions] ? `<track kind="captions" src="${e(piece.captions)}" srclang="es" label="Español" default>` : ''}
                   <source src="${e(piece.video)}" type="video/mp4">
                 </video>

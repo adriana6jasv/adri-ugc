@@ -49,7 +49,7 @@ for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
 
 // 8. Estados de video listos con Vercel Blob
 assert.equal((html.match(/<video\b/g) || []).length, 3, 'Tres tags de video en dist/index.html');
-assert.equal((html.match(/preload="none"/g) || []).length, 3, 'Preload none en todos');
+assert.equal((html.match(/preload="metadata"/g) || []).length, 3, 'Preload metadata en todos');
 assert.equal((html.match(/playsinline/g) || []).length, 3, 'Playsinline en todos');
 assert((html.match(/muted/g) || []).length >= 3, 'Inicio silenciado');
 for (const piece of site.work.pieces) {
