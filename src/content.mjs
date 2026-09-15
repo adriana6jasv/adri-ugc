@@ -1,4 +1,4 @@
-// Identidad, posicionamiento, piezas spotlight y contenidos editoriales de Adriana Seijas — v2 Polished
+// Identidad, posicionamiento, piezas spotlight y contenidos editoriales de Adriana Seijas — v2 Pass 2 (Noise Reduction)
 export const site = {
   name: 'Adriana Seijas',
   shortName: 'Adri',
@@ -85,7 +85,7 @@ export const site = {
   diferencial: {
     eyebrow: 'El Enfoque',
     headline: 'No sólo crea contenido. Sabe cómo contarlo.',
-    intro: 'Maternidad real combinada con criterio periodístico frente a cámara:',
+    intro: '',
     points: [
       {
         num: '01',
@@ -118,19 +118,15 @@ export const site = {
       {
         number: 'A',
         title: 'Concepto + Guion + Producción',
-        subtitle: 'De la idea a la entrega',
-        description: 'Adri desarrolla el concepto, estructura la historia, adapta/escribe el guion y produce la pieza.'
+        description: 'Adri desarrolla el concepto, estructura la historia, adapta o escribe el guion y produce la pieza lista para publicar.'
       },
       {
         number: 'B',
         title: 'Producción desde tu Brief',
-        subtitle: 'Interpretación de tu guion',
-        description: 'La marca o agencia aporta el concepto o script y Adri lo interpreta y produce.'
+        description: 'La marca o agencia aporta el concepto o guion y Adri lo interpreta y produce frente a cámara con audio e iluminación cuidados.'
       }
     ],
-    usageNote: 'Derechos de uso orgánico incluidos. Paid media, whitelisting y exclusividad se acuerdan según campaña.',
-    specsNote: 'Entregas en 4K vertical 9:16 con audio limpio y subtítulos.',
-    billingNote: 'Facturación disponible en México (SAT).'
+    note: 'Derechos de uso orgánico incluidos · Paid media, whitelisting y exclusividad se acuerdan según campaña · Entregas en 4K vertical 9:16 con audio limpio · Facturación fiscal disponible en México (SAT).'
   },
 
   capabilitiesAndNiche: {
@@ -165,7 +161,7 @@ export const site = {
     instagram: '@maternidadconadri',
     instagramUrl: 'https://instagram.com/maternidadconadri',
     commitment: 'Respuesta en 1–2 días hábiles.',
-    availability: 'Disponible para colaborar con marcas de México y de habla hispana.',
+    availability: 'Disponible para marcas de México y de habla hispana.',
     ctaButton: 'Hablemos'
   },
 

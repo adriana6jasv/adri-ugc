@@ -52,11 +52,11 @@ export function render(site, assets) {
           <h3 class="spotlight-title">${e(piece.title)}</h3>
           <p class="spotlight-hook-copy"><strong>${e(piece.copy)}</strong></p>
 
-          <div class="spotlight-tags-wrap">
-            <span class="tags-label">Tags:</span>
-            <ul class="spotlight-tags" aria-label="Tags de ${e(piece.title)}">
-              ${piece.tags.map(tag => `<li>${e(tag)}</li>`).join('')}
-            </ul>
+          <div class="spotlight-tags-line">
+            <span class="tags-line-label">Tags:</span>
+            <div class="tags-inline-group">
+              ${piece.tags.map(t => `<span class="tag-item">${e(t)}</span>`).join('<span class="tag-dot" aria-hidden="true">·</span>')}
+            </div>
           </div>
         </div>
       </article>
@@ -226,16 +226,13 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque: 4 Ideas Clave) -->
+    <!-- 03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque: 4 Puntos) -->
     <section class="editorial-differential container" id="sobre-adri" aria-labelledby="differential-title">
       <div class="differential-header">
         <span class="section-label">03 / El Enfoque</span>
         <h2 class="differential-statement" id="differential-title">
           ${e(site.diferencial.headline)}
         </h2>
-        <p class="differential-intro">
-          ${e(site.diferencial.intro)}
-        </p>
       </div>
 
       <div class="differential-editorial-list">
@@ -268,16 +265,13 @@ ${JSON.stringify(jsonLd, null, 2)}
           <div class="working-option-col">
             <span class="opt-letter">${e(opt.number)}</span>
             <h3 class="opt-title">${e(opt.title)}</h3>
-            <span class="opt-sub">${e(opt.subtitle)}</span>
             <p class="opt-desc">${e(opt.description)}</p>
           </div>
         `).join('')}
       </div>
 
       <div class="working-footnotes">
-        <p class="usage-note">${e(site.workingTogether.usageNote)}</p>
-        <p class="specs-note">${e(site.workingTogether.specsNote)}</p>
-        <p class="tax-note">${e(site.workingTogether.billingNote)}</p>
+        <p class="working-single-note">${e(site.workingTogether.note)}</p>
       </div>
     </section>
 
