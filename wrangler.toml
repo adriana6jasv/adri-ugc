@@ -1,9 +1,6 @@
-﻿name = "adri-ugc"
+name = "adri-ugc"
 compatibility_date = "2024-09-01"
 
 [assets]
 directory = "./dist"
 not_found_handling = "404-page"
-
-[build]
-command = "npm run build"
