@@ -33,7 +33,7 @@ export const site = {
     },
     ctaSecondary: {
       text: 'Hablemos',
-      href: '#contacto'
+      href: '/hablemos/'
     },
     portrait: {
       src: '/images/v2-hero-portrait.jpg',
@@ -159,7 +159,8 @@ export const site = {
     instagramUrl: 'https://instagram.com/maternidadconadri',
     commitment: 'Respuesta en 1–2 días hábiles.',
     availability: 'Disponible para marcas de México y de habla hispana.',
-    ctaButton: 'Hablemos'
+    ctaButton: 'Hablemos',
+    ctaHref: '/hablemos/'
   },
 
   footer: {

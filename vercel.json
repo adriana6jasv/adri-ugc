@@ -8,7 +8,7 @@
       { "key": "X-Content-Type-Options", "value": "nosniff" },
       { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
       { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-      { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self' https: blob: data:; connect-src 'self' https:; frame-src 'self' https://www.googletagmanager.com; base-uri 'self'; form-action 'none'; frame-ancestors 'none'" }
+      { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hsforms.net https://*.hubspot.com https://*.hsforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hsforms.com https://*.hubspot.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self' https: blob: data:; connect-src 'self' https: https://*.hubspot.com https://*.hsforms.com https://*.hsforms.net; frame-src 'self' https://www.googletagmanager.com https://*.hubspot.com https://*.hsforms.com https://*.hsforms.net; base-uri 'self'; form-action 'self' https://*.hubspot.com https://*.hsforms.com https://*.hsforms.net; frame-ancestors 'none'" }
     ]},
     { "source": "/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
   ]

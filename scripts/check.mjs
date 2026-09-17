@@ -75,6 +75,37 @@ for (const file of await readdir(path.join(dist, 'fonts'))) {
   }
 }
 
-const files = ['index.html', 'styles.css', 'main.js', 'icons.mjs'];
+// 11. Botones «Hablemos» enlazan a /hablemos/
+const hablemosButtons = [...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+  .filter(m => m[2].includes('Hablemos'));
+assert.equal(hablemosButtons.length, 3, 'Deben existir exactamente tres botones con texto Hablemos');
+for (const btn of hablemosButtons) {
+  assert.equal(btn[1], '/hablemos/', `El botón Hablemos debe enlazar a /hablemos/, encontrado: ${btn[1]}`);
+}
+
+// 12. Verificación de la landing de captación /hablemos/
+const leadHtml = await readFile(path.join(dist, 'hablemos/index.html'), 'utf8');
+assert(leadHtml.includes('https://maternidadconadri.com/hablemos/'), 'Canonical URL en /hablemos/');
+assert(leadHtml.includes('GTM-N5RK6MLW'), 'GTM tag en /hablemos/');
+assert(leadHtml.includes('G-0LG1K9B8FP'), 'GA4 tag en /hablemos/');
+assert(leadHtml.includes('https://js.hsforms.net/forms/embed/52036222.js'), 'Script embed de HubSpot en /hablemos/');
+assert(leadHtml.includes('4ce2d475-ba60-4534-bda0-ad4deaaaea41'), 'Form ID de HubSpot presente');
+assert(leadHtml.includes('52036222'), 'Portal ID de HubSpot presente');
+assert(leadHtml.includes('Cuéntame sobre'), 'Titular de campaña presente');
+assert(leadHtml.includes('Reviso tu brief'), 'Paso 1 del proceso presente');
+assert(leadHtml.includes('Te respondo'), 'Paso 2 del proceso presente');
+assert(leadHtml.includes('Armamos la propuesta'), 'Paso 3 del proceso presente');
+assert(leadHtml.includes('Presupuestos y pagos en MXN') || leadHtml.includes('pesos mexicanos (MXN)'), 'Mención de MXN presente');
+assert(leadHtml.includes('Facturación fiscal en México'), 'Mención de facturación fiscal SAT presente');
+assert(leadHtml.includes('href="/"'), 'Enlace para volver al portafolio presente');
+
+// 13. Verificación de CSP para HubSpot
+const headers = await readFile(path.join(dist, '_headers'), 'utf8');
+assert(headers.includes('https://js.hsforms.net'), 'CSP permite js.hsforms.net');
+assert(headers.includes('https://*.hubspot.com'), 'CSP permite *.hubspot.com');
+assert(headers.includes('https://*.hsforms.com'), 'CSP permite *.hsforms.com');
+assert(headers.includes('form-action') && headers.includes('https://*.hubspot.com'), 'CSP form-action permite HubSpot');
+
+const files = ['index.html', 'styles.css', 'main.js', 'icons.mjs', 'lead.css', 'hablemos/index.html'];
 const bytes = (await Promise.all(files.map(f => stat(path.join(dist, f))))).reduce((a, s) => a + s.size, 0);
-console.log(`OK: verificación editorial pulida exitosa. Anclas, 3 spotlights visuales, 4 enfoques, copys humanizados y fuentes WOFF2. Total HTML + CSS + JS: ${(bytes / 1024).toFixed(1)} KB.`);
+console.log(`OK: verificación editorial pulida exitosa. Anclas, 3 spotlights visuales, 4 enfoques, 3 botones Hablemos -> /hablemos/, landing con HubSpot integrada, CSP verificado y fuentes WOFF2. Total: ${(bytes / 1024).toFixed(1)} KB.`);

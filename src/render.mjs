@@ -182,7 +182,7 @@ ${JSON.stringify(jsonLd, null, 2)}
       </nav>
 
       <div class="header-cta-wrap">
-        <a href="#contacto" class="editorial-link-btn">
+        <a href="/hablemos/" class="editorial-link-btn">
           <span>Hablemos</span>
           <span class="arrow-svg" aria-hidden="true">${icons.arrowUpRight}</span>
         </a>
@@ -213,7 +213,7 @@ ${JSON.stringify(jsonLd, null, 2)}
               <span>${e(site.hero.ctaPrimary.text)}</span>
               <span class="arrow-svg" aria-hidden="true">${icons.arrowUpRight}</span>
             </a>
-            <a href="#contacto" class="btn-editorial-secondary">
+            <a href="${e(site.hero.ctaSecondary.href || '/hablemos/')}" class="btn-editorial-secondary">
               <span>${e(site.hero.ctaSecondary.text)}</span>
               <span class="arrow-svg" aria-hidden="true">${icons.arrowUpRight}</span>
             </a>
@@ -340,7 +340,7 @@ ${JSON.stringify(jsonLd, null, 2)}
               <span>${e(site.contact.email)}</span>
             </a>
             <div class="contact-buttons-row">
-              <a href="${e(mailtoMain)}" class="btn-contact-primary">
+              <a href="${e(site.contact.ctaHref || '/hablemos/')}" class="btn-contact-primary">
                 <span>${e(site.contact.ctaButton)}</span>
                 <span class="arrow-svg" aria-hidden="true">${icons.arrowUpRight}</span>
               </a>

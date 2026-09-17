@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { site } from '../src/content.mjs';
 import { render } from '../src/render.mjs';
+import { renderLead } from '../src/lead.mjs';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const dist = path.join(root, 'dist');
@@ -35,7 +36,7 @@ export async function build() {
   await rm(dist, { recursive: true, force: true });
   await mkdir(dist, { recursive: true });
   await copyDir(path.join(root, 'public'), dist);
-  await Promise.all(['styles.css', 'refinements.css', 'main.js', 'icons.mjs'].map(name => copyFile(path.join(root, 'src', name), path.join(dist, name))));
+  await Promise.all(['styles.css', 'refinements.css', 'main.js', 'icons.mjs', 'lead.css'].map(name => copyFile(path.join(root, 'src', name), path.join(dist, name))));
   
   // Concatenate main styles and refinements
   const mainCss = await readFile(path.join(root, 'src/styles.css'), 'utf8');
@@ -43,6 +44,8 @@ export async function build() {
   await writeFile(path.join(dist, 'styles.css'), `${mainCss}\n${refCss}\n.hero-portrait-img{object-position:${site.portrait.position.replace(/[^0-9.% a-z-]/g,'')}}`);
 
   await writeFile(path.join(dist, 'index.html'), render(site, assets), 'utf8');
+  await mkdir(path.join(dist, 'hablemos'), { recursive: true });
+  await writeFile(path.join(dist, 'hablemos', 'index.html'), renderLead(site), 'utf8');
   const url = site.url.replace(/\/$/, '');
   
   const robotsContent = `User-agent: *
@@ -70,6 +73,12 @@ ${url ? `Sitemap: ${url}/sitemap.xml\n` : ''}`;
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${url}/hablemos/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
 `;
