@@ -190,47 +190,57 @@ a {
   width: 100%;
 }
 
-.header-brand {
+.header-brand-wrap {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   text-decoration: none;
 }
 
-.brand-monogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--terracotta);
-  flex-shrink: 0;
-}
-
-.brand-monogram svg {
-  width: 26px;
-  height: 26px;
-}
-
-.brand-name-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-name {
+.wordmark {
   font-family: var(--font-serif);
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
   color: var(--text);
-  line-height: 1.1;
+  transition: transform 0.25s var(--ease-editorial);
 }
 
-.brand-role {
-  font-family: var(--font-sans);
+.wordmark:hover {
+  transform: scale(1.02);
+}
+
+.wordmark span {
+  color: var(--terracotta);
+}
+
+.header-descriptor {
+  display: none;
   font-size: 11px;
-  font-weight: 500;
+  line-height: 1.4;
   color: var(--text-subtle);
+  border-left: 1px solid var(--border-strong);
+  padding-left: 16px;
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 768px) {
+  .header-descriptor {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.header-descriptor span:first-child {
+  font-weight: 700;
+  color: var(--text);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  font-size: 10px;
 }
 
 .header-nav {
@@ -338,10 +348,11 @@ a {
 
 .badge-text {
   font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 600;
+  font-size: 11.5px;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .hero-statement {
@@ -1128,6 +1139,11 @@ a {
   max-width: 420px;
 }
 
+.footer-left .wordmark {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
 .footer-brand-name {
   font-family: var(--font-serif);
   font-size: 24px;
@@ -1279,22 +1295,16 @@ a {
     display: none;
   }
 
-  .header-brand {
+  .header-brand-wrap {
     gap: 8px;
     min-width: 0;
   }
 
-  .brand-monogram svg {
-    width: 22px;
-    height: 22px;
+  .header-brand-wrap .wordmark {
+    font-size: 30px;
   }
 
-  .brand-name {
-    font-size: 16px;
-    white-space: nowrap;
-  }
-
-  .brand-role {
+  .header-brand-wrap .header-descriptor {
     display: none;
   }
 

@@ -7,7 +7,7 @@ export const site = {
   badge: 'UGC · MÉXICO',
   specialty: 'Maternidad, Niños y Family Lifestyle',
   location: 'Ciudad de México, México',
-  email: 'adriana6jasv@gmail.com',
+  email: 'hola@maternidadconadri.com',
   instagram: '@maternidadconadri',
   instagramUrl: 'https://instagram.com/maternidadconadri',
   driveUrl: 'https://drive.google.com',
@@ -24,9 +24,9 @@ export const site = {
   hero: {
     pretitle: 'Adri',
     role: 'Creadora UGC & Comunicadora',
-    differentiator: 'Mamá real + formación en Comunicación y Periodismo',
-    headline: 'Contenido que se siente vivido, no producido.',
-    narrative: 'Creo historias cotidianas donde el producto entra con naturalidad y la recomendación se siente real.',
+    differentiator: 'CREADORA UGC & COMUNICADORA',
+    headline: 'Contenido auténtico que conecta con familias reales.',
+    narrative: 'Mamá con formación en Comunicación y Periodismo. Creo historias cotidianas para marcas, donde el producto entra con naturalidad y las recomendaciones transmiten confianza e impulsan la decisión de compra.',
     ctaPrimary: {
       text: 'Ver trabajo',
       href: '#trabajo'
@@ -42,15 +42,15 @@ export const site = {
   },
 
   work: {
-    label: 'Spotlight Work',
+    label: '02 / Showcase',
     headline: 'Historias en vertical pensadas para conectar.',
-    intro: 'Tres formatos donde manda la historia y el producto se integra con naturalidad.',
+    intro: 'Un buen video UGC no se trata de actuar ni de vender de forma agresiva. Con mi experiencia en periodismo y comunicación, identifico lo que de verdad le importa a una mamá o a una familia: transmito los beneficios con naturalidad, honestidad y cercanía para que el público confíe en tu marca.',
     pieces: [
       {
         id: 'spotlight-problem-solution',
         number: '01',
-        title: 'Problem → Solution',
-        copy: 'Un problema real. Una solución integrada naturalmente en la historia.',
+        title: 'Problema Cotidiano → Solución Real',
+        copy: 'Plantea una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
         tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v1.mp4',
@@ -59,8 +59,8 @@ export const site = {
       {
         id: 'spotlight-voiceover',
         number: '02',
-        title: 'Voice-over Storytelling',
-        copy: 'Narrativa visual, producto y voz construyendo una misma historia.',
+        title: 'Historia con Voz en Off',
+        copy: 'Tomas detalladas del producto en un entorno cotidiano real, con una locución cálida y fluida que explica cada beneficio de manera agradable.',
         tags: ['Voice-over', 'B-roll', 'Product Detail', 'Editing'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/voiceover-storytelling-v1.mp4',
@@ -80,29 +80,29 @@ export const site = {
   },
 
   diferencial: {
-    eyebrow: 'El Enfoque',
-    headline: 'No sólo crea contenido. Sabe cómo contarlo.',
+    eyebrow: 'Enfoque',
+    headline: 'No sólo creo contenido. Sé cómo contarlo.',
     intro: '',
     points: [
       {
         num: '01',
-        title: 'Hablar naturalmente frente a cámara',
-        desc: 'Dicción clara, soltura y cercanía para explicar beneficios con naturalidad, conectando de persona a persona sin sonar a anuncio.'
+        title: 'Claridad que genera confianza',
+        desc: 'Formación periodística aplicada al video: buena dicción, mensaje ordenado y demostración práctica que resuelven dudas y motivan la compra de forma orgánica.'
       },
       {
         num: '02',
-        title: 'Encontrar la historia dentro de un brief',
-        desc: 'Lectura estratégica del objetivo de marketing para traducirlo a una situación cotidiana creíble que encaje con el lenguaje de la marca.'
+        title: 'Estrategia detrás de cada historia',
+        desc: 'Leo e interpreto estratégicamente el objetivo de tu marca para traducirlo a una situación cotidiana creíble que conecta de inmediato con la audiencia.'
       },
       {
         num: '03',
-        title: 'Escribir un guion que suene humano',
-        desc: 'Estructura ágil con palabras reales que una mamá le diría a otra, eliminando frases forzadas y adjetivos vacíos.'
+        title: 'Empatía y Conexión Real',
+        desc: 'Hablo el mismo idioma que las familias. Conozco las dudas, rutinas y necesidades del hogar, logrando que cada recomendación se sienta como un consejo sincero entre amigas.'
       },
       {
         num: '04',
-        title: 'Hacer que una pieza comercial no parezca un anuncio',
-        desc: 'La historia engancha y tiene valor por sí misma; la demostración del producto y la recomendación fluyen de forma orgánica.'
+        title: 'Atención desde el Primer Segundo',
+        desc: 'Comienzo cada video con situaciones cotidianas o preguntas reales que despiertan curiosidad inmediata.'
       }
     ]
   },
@@ -115,19 +115,19 @@ export const site = {
       {
         number: 'A',
         title: 'Concepto + Guion + Producción',
-        description: 'Adri desarrolla el concepto, estructura la historia, adapta o escribe el guion y produce la pieza lista para publicar.'
+        description: 'Analizo tu producto, propongo enfoques creativos según las dudas de tu audiencia, redacto guiones cercanos y naturales, y entrego el video editado listo para publicar o pautar.'
       },
       {
         number: 'B',
         title: 'Producción desde tu Brief',
-        description: 'La marca o agencia aporta el concepto o guion y Adri lo interpreta y produce frente a cámara con audio e iluminación cuidados.'
+        description: 'Grabo tu contenido siguiendo el guion o brief de tu equipo, entregando tomas de alta calidad y variantes de inicio para que elijas la que mejor conecta con tu comunidad.'
       }
     ],
     note: 'Derechos de uso orgánico incluidos · Paid media, whitelisting y exclusividad se acuerdan según campaña · Entregas en 4K vertical 9:16 con audio limpio · Facturación fiscal disponible en México (SAT).'
   },
 
   capabilitiesAndNiche: {
-    capabilitiesTitle: 'Capabilities',
+    capabilitiesTitle: 'Capacidades',
     capabilities: [
       'Problem → Solution',
       'Voice-over',
@@ -153,8 +153,8 @@ export const site = {
     eyebrow: 'Contacto',
     headline: 'Hagamos algo que se sienta real.',
     supporting: 'Si buscas contenido auténtico para una marca de maternidad, niños o family lifestyle, hablemos.',
-    email: 'adriana6jasv@gmail.com',
-    mailto: 'mailto:adriana6jasv@gmail.com',
+    email: 'hola@maternidadconadri.com',
+    mailto: 'mailto:hola@maternidadconadri.com',
     instagram: '@maternidadconadri',
     instagramUrl: 'https://instagram.com/maternidadconadri',
     commitment: 'Respuesta en 1–2 días hábiles.',
@@ -165,7 +165,7 @@ export const site = {
   footer: {
     name: 'Adriana Seijas',
     role: 'Creadora UGC & Comunicadora',
-    tagline: 'Contenido que se siente vivido, no producido.',
+    tagline: 'Contenido auténtico que conecta con familias reales.',
     copyright: '© 2026 Adriana Seijas. Ciudad de México.',
     billing: 'Facturación disponible en México (SAT).'
   }

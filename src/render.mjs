@@ -106,6 +106,24 @@ export function render(site, assets) {
   <meta name="description" content="${e(site.description)}">
   <link rel="canonical" href="${e(site.url)}">
 
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N5RK6MLW');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0LG1K9B8FP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0LG1K9B8FP');
+  </script>
+
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="profile">
   <meta property="og:locale" content="es_MX">
@@ -139,22 +157,27 @@ ${JSON.stringify(jsonLd, null, 2)}
   </script>
 </head>
 <body class="editorial-body">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5RK6MLW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <a class="skip-to-content" href="#contenido">Saltar al contenido</a>
 
   <!-- NAVEGACIÓN BOUTIQUE / MINIMALISTA -->
   <header class="editorial-header">
     <div class="header-content container">
-      <a href="#" class="header-brand" aria-label="Adriana Seijas — Portfolio UGC">
-        <span class="brand-monogram" aria-hidden="true">${icons.handHelping}</span>
-        <span class="brand-name-group">
-          <strong class="brand-name">Adriana Seijas</strong>
-          <span class="brand-role">Creadora UGC &amp; Comunicadora</span>
-        </span>
-      </a>
+      <div class="header-brand-wrap">
+        <a class="wordmark" href="#inicio" aria-label="Adriana Seijas, inicio">adri<span>.</span></a>
+        <div class="header-descriptor">
+          <span>Adriana Seijas</span>
+          <span>${e(site.role)} · CDMX</span>
+        </div>
+      </div>
 
       <nav class="header-nav" aria-label="Navegación principal">
-        <a href="#trabajo">Trabajo</a>
-        <a href="#sobre-adri">El Enfoque</a>
+        <a href="#trabajo">Showcase</a>
+        <a href="#enfoque">Enfoque</a>
         <a href="#contacto">Contacto</a>
       </nav>
 
@@ -202,7 +225,7 @@ ${JSON.stringify(jsonLd, null, 2)}
             <img class="hero-portrait-img" src="${e(site.hero.portrait.src)}" alt="${e(site.hero.portrait.alt)}" width="640" height="800" fetchpriority="high" decoding="async">
             <div class="hero-portrait-caption">
               <span class="caption-title">Adriana Seijas</span>
-              <span class="caption-sub">Mamá · Periodista · México</span>
+              <span class="caption-sub">Mamá · Comunicadora &amp; UGC · México</span>
             </div>
           </div>
         </div>
@@ -212,7 +235,7 @@ ${JSON.stringify(jsonLd, null, 2)}
     <!-- 02 — SPOTLIGHT WORK (Inmediato & Visual) -->
     <section class="editorial-spotlight container" id="trabajo" aria-labelledby="spotlight-title">
       <div class="spotlight-intro-header">
-        <span class="section-label">02 / Spotlight Work</span>
+        <span class="section-label">02 / Showcase</span>
         <h2 class="spotlight-main-heading" id="spotlight-title">
           ${e(site.work.headline)}
         </h2>
@@ -226,10 +249,10 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 03 — DIFERENCIAL TIPOGRÁFICO (El Enfoque: 4 Puntos) -->
-    <section class="editorial-differential container" id="sobre-adri" aria-labelledby="differential-title">
+    <!-- 03 — DIFERENCIAL TIPOGRÁFICO (Enfoque: 4 Puntos) -->
+    <section class="editorial-differential container" id="enfoque" aria-labelledby="differential-title">
       <div class="differential-header">
-        <span class="section-label">03 / El Enfoque</span>
+        <span class="section-label">03 / Enfoque</span>
         <h2 class="differential-statement" id="differential-title">
           ${e(site.diferencial.headline)}
         </h2>
@@ -275,13 +298,13 @@ ${JSON.stringify(jsonLd, null, 2)}
       </div>
     </section>
 
-    <!-- 05 — CAPABILITIES & NICHO -->
-    <section class="editorial-index container" id="enfoque" aria-labelledby="index-title">
+    <!-- 05 — CAPACIDADES & NICHO -->
+    <section class="editorial-index container" id="capacidades" aria-labelledby="index-title">
       <div class="index-grid">
         <div class="index-col">
-          <span class="section-label">05 / Capabilities</span>
+          <span class="section-label">05 / Capacidades</span>
           <h3 class="index-heading" id="index-title">${e(site.capabilitiesAndNiche.capabilitiesTitle)}</h3>
-          <ul class="index-list" aria-label="Capabilities creativas">
+          <ul class="index-list" aria-label="Capacidades creativas">
             ${site.capabilitiesAndNiche.capabilities.map(cap => `
               <li>${e(cap)}</li>
             `).join('')}
@@ -342,6 +365,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <footer class="editorial-footer">
     <div class="footer-container container">
       <div class="footer-left">
+        <a class="wordmark" href="#inicio" aria-label="Adriana Seijas">adri<span>.</span></a>
         <strong class="footer-brand-name">${e(site.footer.name)}</strong>
         <span class="footer-brand-role">${e(site.footer.role)}</span>
         <p class="footer-tagline">“${e(site.footer.tagline)}”</p>

@@ -23,7 +23,7 @@ assert.equal((html.match(/<article class="spotlight-case\b/g) || []).length, 3, 
 assert.equal((html.match(/class="differential-row"/g) || []).length, 4, 'Deben existir exactamente cuatro filas en El Enfoque');
 
 // 4. Contacto y Redes
-assert(html.includes('mailto:adriana6jasv@gmail.com'), 'Email de contacto presente');
+assert(html.includes('mailto:hola@maternidadconadri.com'), 'Email de contacto presente');
 assert(html.includes('https://instagram.com/maternidadconadri'), 'Enlace a Instagram presente');
 
 // 5. Verificación estricta: CERO PRECIOS NI PAQUETES PROHIBIDOS
@@ -34,11 +34,13 @@ for (const term of banned) {
 
 // 6. Copys esenciales de la refactorización editorial
 assert(html.includes('México'), 'Mención de México presente');
-assert(html.includes('Contenido que se siente vivido, no producido.'), 'Tagline esencial presente');
-assert(html.includes('No sólo crea contenido. Sabe cómo contarlo.'), 'Manifesto diferencial presente');
-assert(html.includes('Mamá real + formación en Comunicación y Periodismo'), 'Diferenciador presente');
-assert(html.includes('Creo historias cotidianas donde el producto entra con naturalidad y la recomendación se siente real.'), 'Hero copy humanizado presente');
+assert(html.includes('Contenido auténtico que conecta con familias reales.'), 'Tagline esencial presente');
+assert(html.includes('No sólo creo contenido. Sé cómo contarlo.'), 'Manifesto diferencial presente');
+assert(html.includes('CREADORA UGC &amp; COMUNICADORA') || html.includes('CREADORA UGC & COMUNICADORA'), 'Diferenciador presente');
+assert(html.includes('Mamá con formación en Comunicación y Periodismo.'), 'Hero copy humanizado presente');
 assert(html.includes('Facturación'), 'Mención de facturación fiscal SAT');
+assert(html.includes('GTM-N5RK6MLW'), 'GTM tag presente');
+assert(html.includes('G-0LG1K9B8FP'), 'GA4 tag presente');
 
 // 7. Todos los assets referenciados deben existir en dist
 for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
