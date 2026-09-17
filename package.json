@@ -1,9 +1,9 @@
 {
-  "name": "adri-ugc-v2",
+  "name": "adri-ugc",
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Portfolio editorial de Adri — UGC Creator (v2 Figma Design)",
+  "description": "Portfolio editorial de Adri — UGC Creator",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
