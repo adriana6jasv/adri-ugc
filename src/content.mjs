@@ -52,8 +52,8 @@ export const site = {
         title: 'Problema Cotidiano → Solución Real',
         copy: 'Plantea una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
         tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
-        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution.webp',
-        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v1.mp4',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution-v3.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v3.mp4',
         aspect: '9:16'
       },
       {
@@ -62,8 +62,8 @@ export const site = {
         title: 'Historia con Voz en Off',
         copy: 'Tomas detalladas del producto en un entorno cotidiano real, con una locución cálida y fluida que explica cada beneficio de manera agradable.',
         tags: ['Voice-over', 'B-roll', 'Product Detail', 'Editing'],
-        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling.webp',
-        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/voiceover-storytelling-v1.mp4',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling-v3.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/voiceover-storytelling-v3.mp4',
         aspect: '9:16'
       },
       {
@@ -72,8 +72,8 @@ export const site = {
         title: 'Real Mom Storytelling',
         copy: 'Una historia primero. Una integración comercial después.',
         tags: ['Storytelling', 'Motherhood', 'Lifestyle', 'Authenticity'],
-        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/real-mom-storytelling.webp',
-        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/real-mom-storytelling-v1.mp4',
+        poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/real-mom-storytelling-v3.webp',
+        video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/real-mom-storytelling-v3.mp4',
         aspect: '9:16'
       }
     ]
