@@ -43,15 +43,15 @@ export const site = {
 
   work: {
     label: '02 / Showcase',
-    headline: 'Historias en vertical pensadas para conectar.',
-    intro: 'Un buen video UGC no se trata de actuar ni de vender de forma agresiva. Con mi experiencia en periodismo y comunicación, identifico lo que de verdad le importa a una mamá o a una familia: transmito los beneficios con naturalidad, honestidad y cercanía para que el público confíe en tu marca.',
+    headline: '',
+    intro: '',
     pieces: [
       {
         id: 'spotlight-problem-solution',
         number: '01',
         title: 'Real Mom Storytelling',
-        copy: 'Plantea a una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
-        tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
+        copy: 'Busca desde la cercanía, compartir una historia personal que evidencia una realidad muy parecida a la de tu cliente, la cual desencadena necesidades similares y por lo tanto, SOLUCIONES en común.  La idea es generar la venta desde un mensaje de absoluta confianza: “Me sirvió a mí, te sirve a tí“',
+        tags: ['Storytelling', 'Motherhood', 'Lifestyle', 'Authenticity'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution-v3.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v3.mp4',
         aspect: '9:16'
@@ -59,7 +59,7 @@ export const site = {
       {
         id: 'spotlight-voiceover',
         number: '02',
-        title: 'Historia con Voz en Off',
+        title: 'Momento Real',
         copy: 'En este tipo de video la idea no es “simular”. El fin es generar un entorno idóneo que a su vez de paso a un memento familiar que muestre el producto y sus beneficios de forma auténtica. Es sumamente real y permite la conexión inmediata con el espectador.',
         tags: ['Voice-over', 'B-roll', 'Product Detail', 'Editing'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling-v3.webp',
@@ -70,8 +70,8 @@ export const site = {
         id: 'spotlight-real-mom',
         number: '03',
         title: 'Problema Cotidiano → Solución Real',
-        copy: 'Busca desde la cercanía, compartir una historia personal que evidencia una realidad muy parecida a la de tu cliente, la cual desencadena necesidades similares y por lo tanto, SOLUCIONES en común.  La idea es generar la venta desde un mensaje de absoluta confianza: “Me sirvió a mí, te sirve a tí“',
-        tags: ['Storytelling', 'Motherhood', 'Lifestyle', 'Authenticity'],
+        copy: 'Plantea a una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
+        tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/real-mom-storytelling-v3.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/real-mom-storytelling-v3.mp4',
         aspect: '9:16'

@@ -237,13 +237,17 @@ ${JSON.stringify(jsonLd, null, 2)}
     <!-- 02 — SPOTLIGHT WORK (Inmediato & Visual) -->
     <section class="editorial-spotlight container" id="trabajo" aria-labelledby="spotlight-title">
       <div class="spotlight-intro-header">
-        <span class="section-label">02 / Showcase</span>
-        <h2 class="spotlight-main-heading" id="spotlight-title">
-          ${e(site.work.headline)}
-        </h2>
-        <p class="spotlight-intro-text">
-          ${e(site.work.intro)}
-        </p>
+        <h2 class="section-label" id="spotlight-title">${e(site.work.label || '02 / Showcase')}</h2>
+        ${site.work.headline ? `
+          <p class="spotlight-main-heading">
+            ${e(site.work.headline)}
+          </p>
+        ` : ''}
+        ${site.work.intro ? `
+          <p class="spotlight-intro-text">
+            ${e(site.work.intro)}
+          </p>
+        ` : ''}
       </div>
 
       <div class="spotlight-cases-flow">
