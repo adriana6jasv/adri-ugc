@@ -29,21 +29,23 @@ export function render(site, assets) {
               ` : `
                 <img class="spotlight-poster-img" src="${e(piece.poster)}" alt="${e(piece.title)} — Adriana Seijas UGC" loading="lazy" decoding="async">
               `}
+
+              <button class="spotlight-play-btn" data-toggle aria-label="Reproducir video ${e(piece.title)}">
+                <span class="play-icon-inner" aria-hidden="true">${icons.play}</span>
+              </button>
+
+              ${isReady ? `
+                <div class="spotlight-player-controls" hidden>
+                  <button class="ctrl-btn" data-toggle aria-label="Pausar o reproducir">${icons.play}</button>
+                  <span class="ctrl-time">0:00 / 0:00</span>
+                  <input class="ctrl-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Línea de tiempo">
+                  <button class="ctrl-btn" data-mute aria-label="Activar sonido">${icons.sound}</button>
+                  <button class="ctrl-btn" data-fullscreen aria-label="Pantalla completa">${icons.fullscreen}</button>
+                </div>
+              ` : ''}
             </div>
 
-            <button class="spotlight-play-btn" data-toggle aria-label="Reproducir video ${e(piece.title)}">
-              <span class="play-icon-inner" aria-hidden="true">${icons.play}</span>
-            </button>
-
-            ${isReady ? `
-              <div class="spotlight-player-controls" hidden>
-                <button class="ctrl-btn" data-toggle aria-label="Pausar o reproducir">${icons.play}</button>
-                <span class="ctrl-time">0:00 / 0:00</span>
-                <input class="ctrl-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Línea de tiempo">
-                <button class="ctrl-btn" data-mute aria-label="Activar sonido">${icons.sound}</button>
-                <button class="ctrl-btn" data-fullscreen aria-label="Pantalla completa">${icons.fullscreen}</button>
-              </div>
-            ` : ''}
+            <img class="iphone-frame-overlay" src="/images/iphone-pro-max-frame.png" alt="" aria-hidden="true" width="448" height="920" loading="lazy">
           </div>
         </div>
 

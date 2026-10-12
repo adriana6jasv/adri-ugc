@@ -533,13 +533,13 @@ a {
 
 .spotlight-case {
   display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 80px;
+  grid-template-columns: 300px 1fr;
+  gap: 72px;
   align-items: center;
 }
 
 .spotlight-case.is-reversed {
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr 300px;
 }
 
 .spotlight-case.is-reversed .spotlight-media-col {
@@ -558,17 +558,24 @@ a {
 .spotlight-video-frame {
   position: relative;
   width: 100%;
-  max-width: 420px;
-  aspect-ratio: 9 / 16;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background-color: var(--bg-dark);
-  box-shadow: var(--shadow-media);
+  max-width: 300px;
+  aspect-ratio: 448 / 920;
+  border-radius: 46px;
+  background: transparent;
+  filter: drop-shadow(0 20px 40px rgba(15, 12, 10, 0.22));
+  isolation: isolate;
 }
 
 .spotlight-media-wrap {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 1.848%;
+  left: 4.464%;
+  width: 91.071%;
+  height: 96.304%;
+  border-radius: clamp(26px, 9.5%, 40px);
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  z-index: 1;
 }
 
 .spotlight-media-wrap video,
@@ -579,15 +586,25 @@ a {
   display: block;
 }
 
+.iphone-frame-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 3;
+}
+
 .spotlight-play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: none;
@@ -597,7 +614,7 @@ a {
   justify-content: center;
   color: var(--text);
   transition: all 0.25s var(--ease-editorial);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
   z-index: 5;
 }
 
@@ -613,9 +630,9 @@ a {
 }
 
 .play-icon-inner svg {
-  width: 28px;
-  height: 28px;
-  margin-left: 3px;
+  width: 24px;
+  height: 24px;
+  margin-left: 2px;
 }
 
 /* Video Controls Player */
@@ -625,11 +642,12 @@ a {
   left: 0;
   right: 0;
   background: linear-gradient(180deg, transparent 0%, rgba(15, 12, 10, 0.94) 100%);
-  padding: 16px 20px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   z-index: 10;
+  border-radius: 0 0 clamp(26px, 9.5%, 40px) clamp(26px, 9.5%, 40px);
 }
 
 .spotlight-player-controls .ctrl-btn {
@@ -1236,7 +1254,8 @@ a {
   }
 
   .spotlight-video-frame {
-    max-width: 380px;
+    max-width: 270px;
+    margin-inline: auto;
   }
 
   .spotlight-story-col {
@@ -1355,8 +1374,8 @@ a {
   }
 
   .spotlight-video-frame {
-    max-width: 100%;
-    border-radius: var(--radius-md);
+    max-width: 250px;
+    margin-inline: auto;
   }
 
   .spotlight-title {

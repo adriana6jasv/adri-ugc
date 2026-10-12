@@ -37,7 +37,7 @@ assert(html.includes('México'), 'Mención de México presente');
 assert(html.includes('Contenido auténtico que conecta con familias reales.'), 'Tagline esencial presente');
 assert(html.includes('No sólo creo contenido. Sé cómo contarlo.'), 'Manifesto diferencial presente');
 assert(html.includes('CREADORA UGC &amp; COMUNICADORA') || html.includes('CREADORA UGC & COMUNICADORA'), 'Diferenciador presente');
-assert(html.includes('Mamá con formación en Comunicación y Periodismo.'), 'Hero copy humanizado presente');
+assert(html.includes('Soy comunicadora social'), 'Hero copy humanizado presente');
 assert(html.includes('Facturación'), 'Mención de facturación fiscal SAT');
 assert(html.includes('GTM-N5RK6MLW'), 'GTM tag presente');
 assert(html.includes('G-0LG1K9B8FP'), 'GA4 tag presente');

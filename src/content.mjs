@@ -17,8 +17,8 @@ export const site = {
 
   portrait: {
     src: '/images/v2-hero-portrait.jpg',
-    alt: 'Adriana Seijas con sus dos hijos, creadora UGC y comunicadora en México',
-    position: '50% 50%'
+    alt: 'Adriana Seijas, creadora UGC y comunicadora en México',
+    position: '50% 35%'
   },
 
   hero: {
@@ -26,7 +26,7 @@ export const site = {
     role: 'Creadora UGC & Comunicadora',
     differentiator: 'CREADORA UGC & COMUNICADORA',
     headline: 'Contenido auténtico que conecta con familias reales.',
-    narrative: 'Mamá con formación en Comunicación y Periodismo. Creo historias cotidianas para marcas, donde el producto entra con naturalidad y las recomendaciones transmiten confianza e impulsan la decisión de compra.',
+    narrative: 'Soy comunicadora social y me encanta hacer contenido auténtico y estratégico para marcas que buscan conectar de verdad con su audiencia y convertir esa conexión en ventas. Mi mayor fortaleza es que también soy mujer, mamá y consumidora: entiendo lo que siente, piensa y busca tu cliente porque yo soy una de ellas. Por eso creo videos cercanos, reales y con storytelling, donde la experiencia se siente genuina y el producto se integra de forma natural. Mi objetivo es vender sin que parezca que estoy vendiendo: generar ese efecto espejo que hace que tu audiencia se identifique, confíe, quiera probar y finalmente compre.',
     ctaPrimary: {
       text: 'Ver trabajo',
       href: '#trabajo'
@@ -37,7 +37,7 @@ export const site = {
     },
     portrait: {
       src: '/images/v2-hero-portrait.jpg',
-      alt: 'Adriana Seijas con sus dos hijos, creadora UGC y comunicadora'
+      alt: 'Adriana Seijas, creadora UGC y comunicadora'
     }
   },
 
@@ -49,8 +49,8 @@ export const site = {
       {
         id: 'spotlight-problem-solution',
         number: '01',
-        title: 'Problema Cotidiano → Solución Real',
-        copy: 'Plantea una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
+        title: 'Real Mom Storytelling',
+        copy: 'Plantea a una situación común con la que cualquier familia empatiza de inmediato y muestra cómo el producto aporta una solución práctica y duradera, cerrando con una recomendación honesta.',
         tags: ['Hook', 'Problem / Solution', 'Product Demo', 'Natural CTA'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/problem-solution-v3.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/problem-solution-v3.mp4',
@@ -60,7 +60,7 @@ export const site = {
         id: 'spotlight-voiceover',
         number: '02',
         title: 'Historia con Voz en Off',
-        copy: 'Tomas detalladas del producto en un entorno cotidiano real, con una locución cálida y fluida que explica cada beneficio de manera agradable.',
+        copy: 'En este tipo de video la idea no es “simular”. El fin es generar un entorno idóneo que a su vez de paso a un memento familiar que muestre el producto y sus beneficios de forma auténtica. Es sumamente real y permite la conexión inmediata con el espectador.',
         tags: ['Voice-over', 'B-roll', 'Product Detail', 'Editing'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/voiceover-storytelling-v3.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/voiceover-storytelling-v3.mp4',
@@ -69,8 +69,8 @@ export const site = {
       {
         id: 'spotlight-real-mom',
         number: '03',
-        title: 'Real Mom Storytelling',
-        copy: 'Una historia primero. Una integración comercial después.',
+        title: 'Problema Cotidiano → Solución Real',
+        copy: 'Busca desde la cercanía, compartir una historia personal que evidencia una realidad muy parecida a la de tu cliente, la cual desencadena necesidades similares y por lo tanto, SOLUCIONES en común.  La idea es generar la venta desde un mensaje de absoluta confianza: “Me sirvió a mí, te sirve a tí“',
         tags: ['Storytelling', 'Motherhood', 'Lifestyle', 'Authenticity'],
         poster: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/posters/real-mom-storytelling-v3.webp',
         video: 'https://4ww0waodeqpgwvha.public.blob.vercel-storage.com/videos/real-mom-storytelling-v3.mp4',
